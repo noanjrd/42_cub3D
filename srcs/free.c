@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:49:37 by njard            ###   ########.fr       */
+/*   Created: 2025/07/13 13:17:35 by njard             #+#    #+#             */
+/*   Updated: 2025/07/13 15:44:16 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3D.h"
+#include "../include/cub3D.h"
 
-void	ft_init_data(t_data *data, char **argv)
+void ft_free(t_data *data)
 {
-	data->map_file = argv[1];
-	data->NO_texture = NULL;
-	data->WE_texture = NULL;
-	data->EA_texture = NULL;
-	data->SO_texture = NULL;
-	data->F_color = NULL;
-	data->C_color = NULL;
-	data->map = NULL;
-	return ;
+	int i;
+	free(data->C_color);
+	free(data->F_color);
+	free(data->NO_texture);
+	free(data->SO_texture);
+	free(data->WE_texture);
+	free(data->EA_texture);
+	if (data->map)
+	{
+		i = 0;
+		while(data->map[i])
+		{
+			free(data->map[i]);
+			i++;
+		}
+		free(data->map);
+	}
+	free(data);
 }

@@ -6,11 +6,11 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:54:52 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/13 15:45:54 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 char *ft_copy_info(char *line)
 {
@@ -36,12 +36,7 @@ char *ft_copy_info(char *line)
 	return (new);
 } 
 
-void	get_map(t_data *data, char *line)
-{
-	return ;
-}
-
-void	check_info(t_data *data, char *line)
+int	check_info(t_data *data, char *line)
 {
 	int i;
 
@@ -61,35 +56,46 @@ void	check_info(t_data *data, char *line)
 		data->F_color = ft_copy_info(line);
 	if (check_string_beggining(line, "C") == 1)
 		data->C_color = ft_copy_info(line);
-	if (line[i] == '1')
+
+	return (0);
+}
+
+int check_first_param(t_data *data)
+{
+	if (data->F_color && data->C_color && data->NO_texture &&
+		data->SO_texture && data->EA_texture && data->WE_texture)
 	{
-		get_map(data, line);
+		return (1);
 	}
+	return (0);
 }
 
 void get_info(t_data *data, int fd)
 {
 	char *line;
 	line = get_next_line(fd);
-	printf("%s\n", line);
+	// printf("%s\n", line);
 	if (line)
 		check_info(data, line);
-	while (line)
+	while (line && check_first_param(data) == 0)
 	{
 		free(line);
 		line = get_next_line(fd);
-		printf("%s\n", line);
-		check_info(data, line);
+		// printf("%s\n", line);
+		if (line)
+			check_info(data, line);
 	}
+	if (line)
+		free(line);
+	// printf("%s\n", line);
+	if (line == NULL)
+	{
+		ft_print_error("One of the parameters is not correctly written");
+		return ;
+	}
+	// data->map_height++;
+	get_map(data, fd);
 	return ;
-}
-
-int	check_error_parsing(t_data *data)
-{
-	if (!data->F_color || !data->C_color || !data->NO_texture ||
-		!data->SO_texture || !data->EA_texture || !data->WE_texture)
-		ft_print_error("One of the parameters required is not correct");
-		return (1);
 }
 
 void parsing(t_data *data)
@@ -103,5 +109,6 @@ void parsing(t_data *data)
 		return ;
 	}
 	get_info(data, fd);
+	close(fd);
 	// check_error_parsing(data);
 }

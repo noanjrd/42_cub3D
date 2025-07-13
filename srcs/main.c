@@ -6,11 +6,11 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:41:32 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/13 13:57:10 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3D.h"
+#include "../include/cub3D.h"
 
 int main(int argc, char **argv)
 {

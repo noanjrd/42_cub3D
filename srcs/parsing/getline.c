@@ -6,11 +6,11 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:58:28 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:24:30 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/13 13:57:18 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 char	*ft_free_buffer(char *buffer, char *chaine, int put_NULL)
 {

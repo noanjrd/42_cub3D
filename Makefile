@@ -3,13 +3,14 @@ CC = cc
 FLAGS = -g3 -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm  #-fsanitize=address,leak
 RM = rm -rf
 
-SRCS = main.c\
-	utils.c\
-	libft.c\
-	free.c\
-	init.c\
-	parsing/parsing.c\
-	parsing/getline.c
+SRCS = srcs/main.c\
+	srcs/utils.c\
+	srcs/libft.c\
+	srcs/free.c\
+	srcs/init.c\
+	srcs/parsing/parsing.c\
+	srcs/parsing/map.c\
+	srcs/parsing/getline.c
 
 OBJS = ${SRCS:.c=.o}
 

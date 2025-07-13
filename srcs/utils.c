@@ -6,11 +6,25 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:30:29 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:05:03 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/13 15:42:12 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3D.h"
+#include "../include/cub3D.h"
+
+void ft_print_tab(char **tab)
+{
+	int i;
+
+	i = 0;
+	printf("\ntab : ");
+	while(tab[i])
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
+	return ;
+}
 
 int ft_print_error(char *s)
 {
