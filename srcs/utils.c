@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:30:29 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 15:42:12 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/14 17:12:24 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void ft_print_tab(char **tab)
 	int i;
 
 	i = 0;
-	printf("\ntab : ");
+	printf("\ntab : \n");
 	while(tab[i])
 	{
 		printf("%s\n", tab[i]);
@@ -67,3 +67,28 @@ int check_string_beggining(char *s1, char *s2)
 	return (1);
 }
 
+
+int ft_strcmp_space(char *s1, char *s2)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (!s1)
+		return (0);
+	if (ft_strlen(s1) < ft_strlen(s2))
+	{
+		return (0);
+	}
+	while (s1[i] && s1[i] != '\n' && (s1[i] == ' ' || (s1[i] >= 7 && s1[i] <= 13 )))
+		i++;
+	while (s1[i] && s2[j])
+	{
+		if (s1[i] != s2[j])
+			return (0);
+		i++;
+		j++;
+	}
+	return (1);
+}

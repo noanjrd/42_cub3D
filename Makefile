@@ -10,6 +10,7 @@ SRCS = srcs/main.c\
 	srcs/init.c\
 	srcs/parsing/parsing.c\
 	srcs/parsing/map.c\
+	srcs/parsing/map_error.c\
 	srcs/parsing/getline.c
 
 OBJS = ${SRCS:.c=.o}

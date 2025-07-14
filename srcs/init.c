@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 15:19:39 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/14 14:19:21 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	ft_init_data(t_data *data, char **argv)
 	data->C_color = NULL;
 	data->map = NULL;
 	data->map_height = 0;
+	data->map_length = 0;
 	return ;
 }

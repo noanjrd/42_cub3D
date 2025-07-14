@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 15:00:01 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/14 17:09:21 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct t_data
 	char *C_color;
 	char **map;
 	int map_height;
+	int map_length;
 } t_data;
-
 
 
 // PARSING
@@ -37,6 +37,8 @@ typedef struct t_data
 void parsing(t_data *data);
 char	*get_next_line(int fd);
 int	get_map(t_data *data, int fd);
+int skip_old_line(char *line);
+int ft_check_map_error(t_data *data, int fd);
 
 // UTILS
 
@@ -46,3 +48,4 @@ void ft_free(t_data *data);
 int ft_print_error(char *s);
 void	ft_init_data(t_data *data, char **argv);
 void ft_print_tab(char **tab);
+int ft_strcmp_space(char *s1, char *s2);

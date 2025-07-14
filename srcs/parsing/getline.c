@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:58:28 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:57:18 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/14 16:48:36 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,15 +147,15 @@ char	*get_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[80];
 	char		*line;
 
-	if (fd < 0 || 1000 <= 0)
+	if (fd < 0 || fd >= 80)
 		return (NULL);
-	buffer = get_buffer(fd, buffer);
-	if (! buffer || buffer[0] == '\0')
-		return (ft_free_buffer(buffer, buffer, 1));
-	line = get_line_from_buffer(buffer);
-	buffer = update_buffer(buffer);
+	buffer[fd] = get_buffer(fd, buffer[fd]);
+	if (! buffer[fd] || buffer[fd][0] == '\0')
+		return (ft_free_buffer(buffer[fd], buffer[fd], 1));
+	line = get_line_from_buffer(buffer[fd]);
+	buffer[fd] = update_buffer(buffer[fd]);
 	return (line);
 }
