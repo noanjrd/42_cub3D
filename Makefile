@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-FLAGS = -g3 -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm  #-fsanitize=address,leak
+FLAGS = -g3   #-fsanitize=address,leak
 RM = rm -rf
 
 SRCS = srcs/main.c\
@@ -10,6 +10,8 @@ SRCS = srcs/main.c\
 	srcs/init.c\
 	srcs/parsing/parsing.c\
 	srcs/parsing/map.c\
+	srcs/parsing/map_closed.c\
+	srcs/parsing/info_before_map.c\
 	srcs/parsing/map_error.c\
 	srcs/parsing/getline.c
 

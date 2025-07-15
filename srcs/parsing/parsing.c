@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/14 17:11:12 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/15 16:13:29 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,83 +41,62 @@ char *ft_copy_info(char *line)
 	return (new);
 }
 
-
 int check_first_param(t_data *data)
 {
-	if (data->F_color && data->C_color && data->NO_texture &&
-		data->SO_texture && data->EA_texture && data->WE_texture)
+	if (data->F_color && data->C_color &&
+		data->NO_texture && data->SO_texture &&
+		data->EA_texture && data->WE_texture)
 	{
 		return (1);
 	}
 	return (0);
 }
 
-int	check_info(t_data *data, char *line)
+
+int check_name_map(t_map *map)
 {
-	// printf("%s", line);
-	if (ft_strcmp_space(line, "1") == 1 && check_first_param(data) == 0)
-	{
-		return 1;
-	}
-	if (check_string_beggining(line, "NO") == 1)
-		data->NO_texture = ft_copy_info(line);
-	if (check_string_beggining(line, "WE") == 1)
-		data->WE_texture = ft_copy_info(line);
-	if (check_string_beggining(line, "EA") == 1)
-		data->EA_texture = ft_copy_info(line);
-	if (check_string_beggining(line, "SO") == 1)
-		data->SO_texture = ft_copy_info(line);
-	if (check_string_beggining(line, "F") == 1)
-		data->F_color = ft_copy_info(line);
-	if (check_string_beggining(line, "C") == 1)
-		data->C_color = ft_copy_info(line);
-	return (0);
-}
+	int i;
 
-
-int get_info(t_data *data, int fd)
-{
-	char *line;
-	int error;
-	int fd2;
-
-	error = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line && check_info(data, line) == 1 && error == 0)
-			error = 1;
-		free(line);
-		line = get_next_line(fd);
-		// if (line)
-		// {
-		// 	printf("%s", line);
-
-		// }
-	}
-	if (error == 1)
-		return 1;
-	else
-	{
-		fd2 = open(data->map_file, O_RDONLY);
-		get_map(data, fd2);
-	}
+	i = 0;
+	while (map->map_file[i] && map->map_file[i] != '.')
+		i++;
+	if (map->map_file[i] == 0)
+		return -1;
+	i++;
+	if (!map->map_file[i] || !map->map_file[i + 1] ||
+		!map->map_file[i + 2])
+		return -1;
+	if (map->map_file[i] != 'c' || map->map_file[i + 1] != 'u' ||
+			map->map_file[i + 2] != 'b' || map->map_file[i + 3] != 0)
+		return -1;
 	return 0;
 }
 
-void parsing(t_data *data)
+int parsing(t_data *data)
 {
 	int fd;
 
-	fd = open(data->map_file, O_RDONLY, 0700);
+	if (check_name_map(data->map) == -1)
+	{
+		ft_print_error("Wrong file name.");
+		return (-1);
+	}
+	fd = open(data->map->map_file, O_RDONLY, 0700);
 	if (fd < 0)
 	{
 		perror("Error");
-		return ;
+		return (-1);
 	}
 	if (get_info(data, fd) == 1)
-		ft_print_error("One of the parameters is not correctly written");
-	// check_map_closed();
+	{
+		close(fd);
+		return (ft_print_error("One of the parameters is not correctly written"), -1);
+	}
+		else if (check_map_closed(data->map) == 1)
+	{
+		close(fd);
+		return (ft_print_error("The map is not closed"), -1);
+	}
 	close(fd);
-	// check_error_parsing(data);
+	return 0;
 }

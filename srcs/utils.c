@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:30:29 by njard             #+#    #+#             */
-/*   Updated: 2025/07/14 17:12:24 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/15 15:19:59 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void ft_print_tab(char **tab)
 	return ;
 }
 
-int ft_print_error(char *s)
+void ft_print_error(char *s)
 {
 	int i;
 
@@ -38,7 +38,7 @@ int ft_print_error(char *s)
 		i++;
 	}
 	write(2, "\n", 1);
-	return 0;
+	return ;
 }
 
 int check_string_beggining(char *s1, char *s2)

@@ -6,13 +6,37 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:17:35 by njard             #+#    #+#             */
-/*   Updated: 2025/07/14 12:50:04 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/15 16:00:27 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void ft_free(t_data *data)
+void ft_free_tab(char **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab)
+	{
+		while(tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+	}
+	return ;
+}
+
+void ft_free_map(t_map *map)
+{
+	ft_free_tab(map->map);
+	free(map);
+	return ;
+}
+
+void ft_free_data(t_data *data)
 {
 	int i;
 	free(data->C_color);
@@ -21,15 +45,6 @@ void ft_free(t_data *data)
 	free(data->SO_texture);
 	free(data->WE_texture);
 	free(data->EA_texture);
-	if (data->map)
-	{
-		i = 0;
-		while(data->map[i])
-		{
-			free(data->map[i]);
-			i++;
-		}
-		free(data->map);
-	}
+	ft_free_map(data->map);
 	free(data);
 }

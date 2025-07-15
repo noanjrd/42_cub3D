@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:57:10 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/15 16:11:59 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 	t_data *data;
 
 	if (argc == 1)
-		return (ft_print_error("Miss an argument"));
+		return (ft_print_error("Miss an argument"),0);
 	if (argc > 2)
-		return (ft_print_error("Too many arguments"));
+		return (ft_print_error("Too many arguments"),0);
 	data = malloc(sizeof(t_data));
 	ft_init_data(data, argv);
 	parsing(data);
@@ -29,6 +29,6 @@ int main(int argc, char **argv)
 	printf("EA : %s\n", data->EA_texture);
 	printf("F : %s\n", data->F_color);
 	printf("C : %s\n", data->C_color);
-	ft_free(data);
+	ft_free_data(data);
 	return 0;
 }

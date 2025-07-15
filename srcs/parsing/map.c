@@ -6,13 +6,13 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/07/14 17:13:23 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/15 16:06:40 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int copy_line_map(t_data *data, char *line, int z)
+int copy_line_map(t_map *map, char *line, int z)
 {
 	int i;
 	int j;
@@ -21,30 +21,52 @@ int copy_line_map(t_data *data, char *line, int z)
 	i = 0;
 	if (line[i] == '\n')
 		return 0;
-	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
-		i++;
 	j = i;
 	while (line[j] && line[j] != '\n')
 		j++;
 	j--;
 	while (line[j] && (line[j] == ' ' || (line[j] >= 7 && line[j] <= 13)))
 		j--;
-	data->map[z] = malloc((j + 3 + (data->map_length - j)) * sizeof(char));
-	if (!data->map[z])
+	map->map[z] = malloc((j + 4 + (map->map_length - j)) * sizeof(char));
+	if (!map->map[z])
 		return 1;
-	h = i;
+	map->map[z][0] = 'X';
+	h = 0;
 	i = 1;
-	data->map[z][0] = 'X';
-	while(h <= j)
+	while (line[h] && (line[h] == ' ' || (line[h] >= 7 && line[h] <= 13)))
 	{
-		data->map[z][i++] = line[h++];
-	}
-	while(h <= data->map_length)
-	{
-		data->map[z][i++] = 'X';
+		map->map[z][i++] =  'X';
 		h++;
 	}
-	data->map[z][i] = 0;
+	h = h;
+	map->map[z][0] = 'X';
+	while(h <= j)
+	{
+		map->map[z][i++] = line[h++];
+		if (line[h - 1] && line[h - 1] == '1' && (line[h] == ' ' || (line[h] >= 7 && line[h] <= 13)))
+		{	
+			while(line[h] && line[h] != '1' && line[h] != '0' &&
+				line[h] != 'W' && line[h] != 'S' &&
+				line[h] != 'E' && line[h] != 'N')
+			{
+				map->map[z][i++] = 'X';
+				h++;
+			}
+		}
+	}
+	while(h <= map->map_length)
+	{
+		map->map[z][i++] = 'X';
+		h++;
+	}
+	map->map[z][i] = 0;
+	i = 0;
+	while (line && line[i])
+	{
+		if (line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == 'N')
+			map->nb_player++;
+		i++;
+	}
 	return 0;
 }
 
@@ -62,28 +84,29 @@ int skip_old_line(char *line)
 	return (0);
 }
 
-void	put_X_to_line(t_data *data, char *line, int z)
+void	put_X_to_line(t_map *map, char *line, int z)
 {
 	int i;
 	int len;
 
 	i = 0;
-	len = data->map_length + 2;
-	data->map[z] = malloc((len + 1) * sizeof(char));
+	len = map->map_length + 2;
+	map->map[z] = malloc((len + 1) * sizeof(char));
 	while(i < len)
 	{
-		data->map[z][i] = 'X';
+		map->map[z][i] = 'X';
 		i++;
 	}
-	data->map[z][i] = 0;
-	if (z == (data->map_height + 1))
+	map->map[z][i] = 0;
+	if (z == (map->map_height + 1))
 	{
-		line = data->map[z + 1] = NULL;
+		line = map->map[z + 1] = NULL;
 	}
+	i = 0;
 	return ;
 }
 
-void get_line_map(t_data *data, int fd)
+void get_line_map(t_map *map, int fd)
 {
 	char *line;
 	int z;
@@ -94,78 +117,62 @@ void get_line_map(t_data *data, int fd)
 	{
 		free(line);
 		line = get_next_line(fd);
-		// if (line)
-			// printf("%s", line);
 	}
 	if (line)
 	{
-		put_X_to_line(data, line, 0);
-		copy_line_map(data, line, z);
+		put_X_to_line(map, line, 0);
+		copy_line_map(map, line, z);
 	}
-	// printf("%s\n", line);
 	while (line)
 	{
 		free(line);
 		z++;
 		line = get_next_line(fd);
 		if (line)
-		{
-			// printf("wqqqq: %s", line);
-			copy_line_map(data, line, z);
-		}
-
+			copy_line_map(map, line, z);
 	}
-	put_X_to_line(data, line, (data->map_height + 1));
-	ft_print_tab(data->map);
-	return ;
+	put_X_to_line(map, line, (map->map_height + 1));
+	ft_print_tab(map->map);
 }
 
-int	get_map(t_data *data, int fd)
+void get_map_next(t_map *map)
 {
-	char *line;
 	int fd2;
 	int fd3;
+
+	fd2 = open(map->map_file, O_RDONLY, 0700);
+	if (ft_check_map_error(map, fd2) == -1)
+	{
+		map->map[0] = NULL;
+		return (ft_print_error("There is an error regarding the map."));
+	}
+	fd3 = open(map->map_file, O_RDONLY, 0700);
+	get_line_map(map, fd3);
+	if (map->nb_player == 0 || map->nb_player >= 2)
+		return (ft_print_error("The number of players is incorrect."));
+	close(fd2);
+}
+
+void	get_map(t_map *map, int fd)
+{
+	char *line;
 	
 	line = get_next_line(fd);
-	// printf("tuuuuu : %s\n", line);
 	if (line)
-		data->map_height++;
+		map->map_height++;
 	while (line && skip_old_line(line) == 0)
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
-	
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line && ft_strcmp_space(line, "1") == 1)
-		{
-			// printf("%s\n", line);
-			data->map_height++;
-		}
+			map->map_height++;
 	}
-	(data->map) = malloc((data->map_height + 3) * sizeof(char *));
-	fd2 = open(data->map_file, O_RDONLY, 0700);
-	if (fd2 < 0)
-	{
-		ft_print_error("Erreur d'ouverture du fichier");
-		return (1);
-	}
-	if (ft_check_map_error(data, fd2) == 1)
-	{
-		ft_print_error("Ya une erreur");
-		data->map[0] = NULL;
-		return 1;
-	}
-	fd3 = open(data->map_file, O_RDONLY, 0700);
-	get_line_map(data, fd3);
-	printf("length : %d\n", data->map_length);
-	printf("height : %d\n", data->map_height);
-	close(fd);
-	close(fd2);
-	// printf("error : %d\n", check_respect_format(data));
-	return (0);
+	(map->map) = malloc((map->map_height + 3) * sizeof(char *));
+	get_map_next(map);
 }
 
