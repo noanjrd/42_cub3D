@@ -6,11 +6,12 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:30:29 by njard             #+#    #+#             */
-/*   Updated: 2025/07/15 15:19:59 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/16 14:59:07 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
+
 
 void ft_print_tab(char **tab)
 {
@@ -26,6 +27,7 @@ void ft_print_tab(char **tab)
 	return ;
 }
 
+// Print the message s according to the subject's rules
 void ft_print_error(char *s)
 {
 	int i;
@@ -41,33 +43,7 @@ void ft_print_error(char *s)
 	return ;
 }
 
-int check_string_beggining(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	if (!s1)
-		return (0);
-	if (ft_strlen(s1) < ft_strlen(s2))
-	{
-		return (0);
-	}
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (!s1[i] || (s1[i] != ' ' && !(s1[i] >= 7 && s1[i] <= 13 )))
-		return (0);
-	while(s1[i] && (s1[i] == ' ' || (s1[i] >= 7 && s1[i] <= 13 )))
-		i++;
-	if (s1[i] == 0)
-		return (0);
-	return (1);
-}
-
-
+// Check if s2 is at the beggingin of s1 after having skiped all the space
 int ft_strcmp_space(char *s1, char *s2)
 {
 	int i;
@@ -92,3 +68,4 @@ int ft_strcmp_space(char *s1, char *s2)
 	}
 	return (1);
 }
+

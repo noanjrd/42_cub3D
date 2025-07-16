@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/15 16:12:20 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/16 15:01:20 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+typedef struct t_color
+{
+	long r;
+	long	g;
+	long	b;
+}	t_color;
 
 typedef struct t_map
 {
@@ -35,11 +42,16 @@ typedef struct t_data
 	char *F_color;
 	char *C_color;
 	t_map *map;
+	t_color *ceiling;
+	t_color *floor;
 } t_data;
 
 
 // PARSING
 
+char	*get_line_from_buffer(char *buffer);
+char	*ft_free_buffer(char *buffer, char *chaine, int put_NULL);
+char	*ft_strjoin_gnl(char *buffer, char *temp);
 int parsing(t_data *data);
 char	*get_next_line(int fd);
 void	get_map(t_map *map, int fd);
@@ -59,3 +71,4 @@ void ft_print_error(char *s);
 void	ft_init_data(t_data *data, char **argv);
 void ft_print_tab(char **tab);
 int ft_strcmp_space(char *s1, char *s2);
+long	ft_atoi(const char *nptr);

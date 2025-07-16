@@ -6,11 +6,11 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/07/15 15:59:23 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/16 14:38:46 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 void	ft_init_map(t_map *map, char **argv)
 {
@@ -24,8 +24,12 @@ void	ft_init_map(t_map *map, char **argv)
 void	ft_init_data(t_data *data, char **argv)
 {
 	t_map *map;
+	t_color *ceiling;
+	t_color *floor;
 
 	map = malloc(sizeof(t_map));
+	ceiling = malloc(sizeof(t_color));
+	floor = malloc(sizeof(t_color));
 	data->NO_texture = NULL;
 	data->WE_texture = NULL;
 	data->EA_texture = NULL;
@@ -33,6 +37,8 @@ void	ft_init_data(t_data *data, char **argv)
 	data->F_color = NULL;
 	data->C_color = NULL;
 	data->map = map;
+	data->ceiling  =ceiling;
+	data->floor = floor;
 	ft_init_map(map, argv);
 	return ;
 }

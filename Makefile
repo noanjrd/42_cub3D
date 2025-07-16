@@ -4,16 +4,18 @@ FLAGS = -g3   #-fsanitize=address,leak
 RM = rm -rf
 
 SRCS = srcs/main.c\
-	srcs/utils.c\
-	srcs/libft.c\
-	srcs/free.c\
-	srcs/init.c\
+	srcs/utils/utils.c\
+	srcs/utils/utils2.c\
+	srcs/utils/libft.c\
+	srcs/utils/free.c\
+	srcs/utils/init.c\
 	srcs/parsing/parsing.c\
 	srcs/parsing/map.c\
 	srcs/parsing/map_closed.c\
 	srcs/parsing/info_before_map.c\
 	srcs/parsing/map_error.c\
-	srcs/parsing/getline.c
+	srcs/parsing/getline.c\
+	srcs/parsing/getline2.c
 
 OBJS = ${SRCS:.c=.o}
 

@@ -6,18 +6,18 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:32:59 by njard             #+#    #+#             */
-/*   Updated: 2025/07/13 13:57:08 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/16 14:59:26 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 int	ft_strlen(char *chaine)
 {
 	int	i;
 
 	i = 0;
-	if (chaine == NULL)
+	if (chaine == NULL || !chaine)
 		return (0);
 	while (chaine[i] != '\0')
 		i++;
