@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/16 15:01:20 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/20 15:01:00 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int check_first_param(t_data *data);
 // UTILS
 
 int	ft_strlen(char *chaine);
-int check_string_beggining(char *s1, char *s2);
+int check_string_beggining(char *s1, char *s2, int texture);
 void ft_free_data(t_data *data);
 void ft_print_error(char *s);
 void	ft_init_data(t_data *data, char **argv);
