@@ -11,11 +11,14 @@ SRCS = srcs/main.c\
 	srcs/utils/init.c\
 	srcs/parsing/parsing.c\
 	srcs/parsing/map.c\
+	srcs/parsing/map2.c\
 	srcs/parsing/map_closed.c\
 	srcs/parsing/info_before_map.c\
+	srcs/parsing/info_before_map2.c\
 	srcs/parsing/map_error.c\
 	srcs/parsing/getline.c\
-	srcs/parsing/getline2.c
+	srcs/parsing/getline2.c\
+	srcs/parsing/colors.c
 
 OBJS = ${SRCS:.c=.o}
 

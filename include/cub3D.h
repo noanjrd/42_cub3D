@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/20 15:01:00 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/28 12:09:17 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ int check_map_closed(t_map *map);
 int get_info(t_data *data, int fd);
 char *ft_copy_info(char *line);
 int check_first_param(t_data *data);
+int check_good_format_color(t_data *data);
+int	color_to_int(char *color_tab, t_color *color, int j);
+int check_string_beggining(char *s1, char *s2, int texture);
+int copy_line_map(t_map *map, char *line, int z, int i);
 
 // UTILS
 

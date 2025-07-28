@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 12:58:24 by njard             #+#    #+#             */
-/*   Updated: 2025/07/15 15:50:01 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/28 12:07:08 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ void check_length_line(t_map *map, char *line)
 	return ;
 }
 
-int	check_line_format_next(char *line, int z)
+int	check_line_format_next(char *line, int z , int i, int j)
 {
-	int i;
-	int j;
-
 	i = 0;
 	while ( line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
@@ -88,7 +85,7 @@ int	check_line_format(t_map *map, char *line, int z)
 		}
 	}
 	check_length_line(map, line);
-	return (check_line_format_next(line, z));
+	return (check_line_format_next(line, z , 0, 0));
 }
 
 int ft_check_map_error(t_map *map, int fd)
