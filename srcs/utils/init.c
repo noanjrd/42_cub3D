@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/07/16 14:38:46 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/28 13:14:52 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@ void	ft_init_map(t_map *map, char **argv)
 	map->map = NULL;
 }
 
+void	ft_init_mlx(t_mlx *mlx)
+{
+	mlx->addr = NULL;
+	mlx->win = NULL;
+	mlx->img = NULL;
+	
+}
+
 void	ft_init_data(t_data *data, char **argv)
 {
 	t_map *map;
 	t_color *ceiling;
 	t_color *floor;
+	t_mlx *mlx;
 
 	map = malloc(sizeof(t_map));
+	mlx = malloc(sizeof(t_mlx));
 	ceiling = malloc(sizeof(t_color));
 	floor = malloc(sizeof(t_color));
 	data->NO_texture = NULL;
@@ -39,6 +49,7 @@ void	ft_init_data(t_data *data, char **argv)
 	data->map = map;
 	data->ceiling  =ceiling;
 	data->floor = floor;
+	data->mlx = mlx;
 	ft_init_map(map, argv);
 	return ;
 }

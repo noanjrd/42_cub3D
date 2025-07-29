@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/07/21 16:19:23 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/29 13:41:19 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,19 @@ int main(int argc, char **argv)
 		return (ft_print_error("Too many arguments"),0);
 	data = malloc(sizeof(t_data));
 	ft_init_data(data, argv);
-	parsing(data);
-	printf("NO : %s\n", data->NO_texture);
-	printf("SO : %s\n", data->SO_texture);
-	printf("WE : %s\n", data->WE_texture);
-	printf("EA : %s\n", data->EA_texture);
-	printf("F : %s\n", data->F_color);
-	printf("C : %s\n", data->C_color);
+	if (parsing(data) == 0)
+	{
+		printf("NO : %s\n", data->NO_texture);
+		printf("SO : %s\n", data->SO_texture);
+		printf("WE : %s\n", data->WE_texture);
+		printf("EA : %s\n", data->EA_texture);
+		printf("F : %s\n", data->F_color);
+		printf("C : %s\n", data->C_color);
+		printf("colorrrr f : %ld, %ld, %ld\n",data->floor->r, data->floor->g, data->floor->b);
+		printf("colorrrr c : %ld, %ld, %ld\n",data->ceiling->r, data->ceiling->g, data->ceiling->b);
+		// init_mlx(data);
+	}
+	
 	ft_free_data(data);
 	return 0;
 }

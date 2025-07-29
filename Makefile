@@ -18,14 +18,15 @@ SRCS = srcs/main.c\
 	srcs/parsing/map_error.c\
 	srcs/parsing/getline.c\
 	srcs/parsing/getline2.c\
-	srcs/parsing/colors.c
+	srcs/parsing/colors.c\
+	srcs/exec/exec.c
 
 OBJS = ${SRCS:.c=.o}
 
 all: install $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME) 
+	$(CC) $(FLAGS) $(OBJS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
 	make clean
 
 %.o: %.c

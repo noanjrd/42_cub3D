@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 12:01:45 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/29 13:22:20 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ int check_first_param(t_data *data)
 	return (0);
 }
 
+int open_textures(t_data *data)
+{
+	int fd;
+
+	fd = open(data->NO_texture, O_RDONLY, 0700);
+	if (fd < 0)
+		return -1;
+	close(fd);
+	fd = open(data->SO_texture, O_RDONLY, 0700);
+	if (fd < 0)
+		return -1;
+	close(fd);
+	fd = open(data->WE_texture, O_RDONLY, 0700);
+	if (fd < 0)
+		return -1;
+	close(fd);
+	fd = open(data->EA_texture, O_RDONLY, 0700);
+	if (fd < 0)
+		return -1;
+	close(fd);
+	return 0;
+}
 
 int check_name_map(t_map *map)
 {
@@ -77,7 +99,7 @@ int parsing(t_data *data)
 	int fd;
 
 	if (check_name_map(data->map) == -1)
-		return (ft_print_error("Wrong file name."), -1);
+		return (ft_print_error("Wrong file extension."), -1);
 	fd = open(data->map->map_file, O_RDONLY, 0700);
 	if (fd < 0)
 		return (perror("Error"), -1);
@@ -92,7 +114,7 @@ int parsing(t_data *data)
 		return (ft_print_error("The color of the ceiling doesn't have a rgb format."), -1);
 	if (check_good_format_color(data) == -1)
 		return (ft_print_error("Each number of the rgb color must be between 0 and 255."), -1);
-	printf("colorrrr f : %ld, %ld, %ld\n",data->floor->r, data->floor->g, data->floor->b );
-	printf("colorrrr c : %ld, %ld, %ld\n",data->ceiling->r, data->ceiling->g, data->ceiling->b );
+	if (open_textures(data) == -1)
+		return (ft_print_error("Can't open one of the textures."), -1);
 	return 0;
 }

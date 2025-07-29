@@ -6,16 +6,21 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 12:09:17 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/29 14:13:58 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include "../mlx_linux/mlx.h"
+#include "../mlx_linux/mlx_int.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+#define WINDOW_WIDTH 100
+#define WINDOW_HEIGHT 100
 
 typedef struct t_color
 {
@@ -24,6 +29,19 @@ typedef struct t_color
 	long	b;
 }	t_color;
 
+
+typedef struct t_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	void	*addr;
+	int		number;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+} t_mlx;
+
 typedef struct t_map
 {
 	char *map_file;
@@ -31,6 +49,7 @@ typedef struct t_map
 	int map_height;
 	int map_length;
 	int nb_player;
+	char *l;
 } t_map;
 
 typedef struct t_data
@@ -44,6 +63,7 @@ typedef struct t_data
 	t_map *map;
 	t_color *ceiling;
 	t_color *floor;
+	t_mlx *mlx;
 } t_data;
 
 
@@ -76,3 +96,7 @@ void	ft_init_data(t_data *data, char **argv);
 void ft_print_tab(char **tab);
 int ft_strcmp_space(char *s1, char *s2);
 long	ft_atoi(const char *nptr);
+
+// EXECUTION
+
+void init_mlx(t_data *data);

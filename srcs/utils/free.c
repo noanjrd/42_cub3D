@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:17:35 by njard             #+#    #+#             */
-/*   Updated: 2025/07/16 14:38:42 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/29 13:42:43 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void ft_free_tab(char **tab)
 	return ;
 }
 
+void ft_free_mlx(t_mlx *mlx)
+{
+	free(mlx);
+	return ;
+}
+
 void ft_free_map(t_map *map)
 {
 	ft_free_tab(map->map);
@@ -38,7 +44,6 @@ void ft_free_map(t_map *map)
 
 void ft_free_data(t_data *data)
 {
-	int i;
 	free(data->C_color);
 	free(data->F_color);
 	free(data->NO_texture);
@@ -48,5 +53,6 @@ void ft_free_data(t_data *data)
 	free(data->floor);
 	free(data->ceiling);
 	ft_free_map(data->map);
+	ft_free_mlx(data->mlx);
 	free(data);
 }
