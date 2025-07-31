@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/29 14:13:58 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/31 13:38:26 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#define PARAM_WRITTEN "One of the parameters is not correctly written"
+#define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
+#define NOT_RGB "The color of the ceiling doesn't have a rgb format."
+#define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
 #define WINDOW_WIDTH 100
 #define WINDOW_HEIGHT 100
 
@@ -85,6 +89,7 @@ int check_good_format_color(t_data *data);
 int	color_to_int(char *color_tab, t_color *color, int j);
 int check_string_beggining(char *s1, char *s2, int texture);
 int copy_line_map(t_map *map, char *line, int z, int i);
+void fill_line(t_map *map, int z, int start, int end);
 
 // UTILS
 

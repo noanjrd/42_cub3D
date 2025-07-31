@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 12:58:24 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 12:07:08 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/31 13:29:25 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ int	check_line_format_next(char *line, int z , int i, int j)
 	return (0);
 }
 
-int	check_line_format(t_map *map, char *line, int z)
+int	check_line_format(t_map *map, char *line, int z, int i)
 {
-	int i;
 	int j;
 
-	i = 0;
 	if (line[i] == '\n')
 		return 0;
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
@@ -82,7 +80,7 @@ int	check_line_format(t_map *map, char *line, int z)
 				line[i] != ' ' && !(line[i] >= 7 && line[i] <= 13))
 				return (-1);
 			i++;
-		}
+		}	
 	}
 	check_length_line(map, line);
 	return (check_line_format_next(line, z , 0, 0));
@@ -103,14 +101,14 @@ int ft_check_map_error(t_map *map, int fd)
 		line = get_next_line(fd);
 	}
 	if (line)
-		error = check_line_format(map, line, 0);
+		error = check_line_format(map, line, 0, 0);
 	while (line)
 	{
 		free(line);
 		z++;
 		line = get_next_line(fd);
 		if (line && error == 0)
-			error = check_line_format(map, line, z);
+			error = check_line_format(map, line, z, 0);
 	}
 	return (error);
 }

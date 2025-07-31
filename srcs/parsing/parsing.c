@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/29 13:22:20 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/31 13:40:17 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,16 @@ int parsing(t_data *data)
 	if (fd < 0)
 		return (perror("Error"), -1);
 	if (get_info(data, fd) == 1)
-		return (close(fd), ft_print_error("One of the parameters is not correctly written"), -1);
+		return (close(fd), ft_print_error(PARAM_WRITTEN), -1);
 	else if (check_map_closed(data->map) == 1)
 		return (close(fd), ft_print_error("The map is not closed"), -1);
 	close(fd);
 	if (color_to_int(data->F_color, data->floor,0) == -1)
-		return (ft_print_error("The color of the floor doesn't have a rgb format."), -1);
+		return (ft_print_error(WRONG_COLOR_FORMAT), -1);
 	if (color_to_int(data->C_color, data->ceiling,0) == -1)
-		return (ft_print_error("The color of the ceiling doesn't have a rgb format."), -1);
+		return (ft_print_error(NOT_RGB), -1);
 	if (check_good_format_color(data) == -1)
-		return (ft_print_error("Each number of the rgb color must be between 0 and 255."), -1);
+		return (ft_print_error(NOT_A_BYTE), -1);
 	if (open_textures(data) == -1)
 		return (ft_print_error("Can't open one of the textures."), -1);
 	return 0;

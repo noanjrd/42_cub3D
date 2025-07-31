@@ -12,6 +12,7 @@ SRCS = srcs/main.c\
 	srcs/parsing/parsing.c\
 	srcs/parsing/map.c\
 	srcs/parsing/map2.c\
+	srcs/parsing/map3.c\
 	srcs/parsing/map_closed.c\
 	srcs/parsing/info_before_map.c\
 	srcs/parsing/info_before_map2.c\

@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/07/29 14:26:19 by njard            ###   ########.fr       */
+/*   Updated: 2025/07/31 13:31:19 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,6 @@ static int fill_prefix(t_map *map, char *line, int z)
 		h++;
 	}
 	return i;
-}
-
-static void fill_line(t_map *map, int z, int start, int end)
-{
-	int i;
-	int h;
-
-	h = 0;
-	i = start;
-	while (h <= end)
-	{
-		map->map[z][i++] = map->l[h++];
-		if (map->l[h] == ' ' || (map->l[h] >= 7 && map->l[h] <= 13))
-		{
-			while (map->l[h] && map->l[h] != '1' && map->l[h] != '0' &&
-				map->l[h] != 'W' && map->l[h] != 'S' && map->l[h] != 'E' &&
-				map->l[h] != 'N')
-			{
-				map->map[z][i++] = 'X';
-				h++;
-			}
-		}
-	}
-	while (h <= map->map_length)
-	{
-		map->map[z][i++] = 'X';
-		h++;
-	}
-	map->map[z][i] = 0;
 }
 
 static void count_player(char *line, t_map *map)
