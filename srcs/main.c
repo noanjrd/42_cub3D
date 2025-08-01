@@ -6,11 +6,13 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/07/29 13:41:19 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/01 16:27:38 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+// enlever le relink
 
 int main(int argc, char **argv)
 {
@@ -32,7 +34,8 @@ int main(int argc, char **argv)
 		printf("C : %s\n", data->C_color);
 		printf("colorrrr f : %ld, %ld, %ld\n",data->floor->r, data->floor->g, data->floor->b);
 		printf("colorrrr c : %ld, %ld, %ld\n",data->ceiling->r, data->ceiling->g, data->ceiling->b);
-		// init_mlx(data);
+		ft_init_player(data->player, data->map->map);
+		init_mlx(data);
 	}
 	
 	ft_free_data(data);

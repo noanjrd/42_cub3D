@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 13:14:52 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/01 16:00:59 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,61 @@ void	ft_init_map(t_map *map, char **argv)
 	map->map = NULL;
 }
 
+void	player_direction( t_player *player, char direction)
+{
+	if (direction == 'N')
+	{
+		player->dirX = 0;
+		player->dirY = -1;
+	}
+	if (direction == 'S')
+	{
+		player->dirX = 0;
+		player->dirY = 1;
+	}
+	if (direction == 'W')
+	{
+		player->dirX = -1;
+		player->dirY = 0;
+	}
+	if (direction == 'E')
+	{
+		player->dirX = 1;
+		player->dirY = 0;
+	}
+}
+
+void	ft_init_player( t_player *player, char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				player->posX = i;
+				player->posY = j;
+				player_direction(player, map[i][j]);
+			}
+			j++;
+		}
+		i++;
+	}
+	player->planeX = 0.66;
+	player->planeY = 0;
+}
+
 void	ft_init_mlx(t_mlx *mlx)
 {
 	mlx->addr = NULL;
 	mlx->win = NULL;
 	mlx->img = NULL;
-	
 }
 
 void	ft_init_data(t_data *data, char **argv)
@@ -35,11 +84,13 @@ void	ft_init_data(t_data *data, char **argv)
 	t_color *ceiling;
 	t_color *floor;
 	t_mlx *mlx;
+	t_player *player;
 
 	map = malloc(sizeof(t_map));
 	mlx = malloc(sizeof(t_mlx));
 	ceiling = malloc(sizeof(t_color));
 	floor = malloc(sizeof(t_color));
+	player = malloc(sizeof(t_player));
 	data->NO_texture = NULL;
 	data->WE_texture = NULL;
 	data->EA_texture = NULL;
@@ -50,6 +101,7 @@ void	ft_init_data(t_data *data, char **argv)
 	data->ceiling  =ceiling;
 	data->floor = floor;
 	data->mlx = mlx;
+	data->player = player;
 	ft_init_map(map, argv);
 	return ;
 }

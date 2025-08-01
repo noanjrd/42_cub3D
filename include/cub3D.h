@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:38:26 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/01 16:09:08 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
 #define NOT_RGB "The color of the ceiling doesn't have a rgb format."
 #define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
-#define WINDOW_WIDTH 100
-#define WINDOW_HEIGHT 100
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 typedef struct t_color
 {
 	long r;
 	long	g;
 	long	b;
+	long color;
 }	t_color;
 
 
@@ -39,7 +40,7 @@ typedef struct t_mlx
 	void	*mlx;
 	void	*win;
 	void	*img;
-	void	*addr;
+	char	*addr;
 	int		number;
 	int		bits_per_pixel;
 	int		line_length;
@@ -56,6 +57,17 @@ typedef struct t_map
 	char *l;
 } t_map;
 
+
+typedef struct s_player
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+} t_player;
+
 typedef struct t_data
 {
 	char *NO_texture;
@@ -68,6 +80,7 @@ typedef struct t_data
 	t_color *ceiling;
 	t_color *floor;
 	t_mlx *mlx;
+	t_player *player;
 } t_data;
 
 
@@ -104,4 +117,6 @@ long	ft_atoi(const char *nptr);
 
 // EXECUTION
 
+void	ft_init_player( t_player *player, char **map);
 void init_mlx(t_data *data);
+void raycasting(t_data *data, t_mlx *mlx);

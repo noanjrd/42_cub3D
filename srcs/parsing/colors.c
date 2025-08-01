@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 12:01:38 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/01 16:24:02 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int check_good_format_color(t_data *data)
 		!(data->floor->g >= 0 && data->floor->g <= 255) ||
 		!(data->floor->b >= 0 && data->floor->b <= 255))
 		return -1;
+	data->ceiling->color = (data->ceiling->r << 16) | (data->ceiling->g << 8) | data->ceiling->b;
+	data->floor->color = (data->floor->r << 16) | (data->floor->g << 8) | data->floor->b;
 	return 0;
 } 
 

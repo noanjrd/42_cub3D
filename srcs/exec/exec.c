@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 14:19:28 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/01 15:59:33 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ void init_mlx(t_data *data)
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img,
 			&data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
+	raycasting(data, data->mlx);
+
 }
