@@ -74,7 +74,7 @@ void get_line_map(t_map *map, int fd)
 			copy_line_map(map, line, z, 0);
 	}
 	put_x_to_line(map, line, (map->map_height + 1));
-	ft_print_tab(map->map);
+	// ft_print_tab(map->map);
 }
 
 void get_map_next(t_map *map)

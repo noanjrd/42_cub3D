@@ -16,9 +16,7 @@ void init_mlx(t_data *data)
 {
 	data->mlx->mlx = mlx_init();
 	if (!data->mlx->mlx)
-	{
 		return ;
-	}
 	data->mlx->win = mlx_new_window(data->mlx->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	data->mlx->img = mlx_new_image(data->mlx->mlx,

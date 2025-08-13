@@ -23,8 +23,8 @@
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
 #define NOT_RGB "The color of the ceiling doesn't have a rgb format."
 #define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
-#define WINDOW_WIDTH 100
-#define WINDOW_HEIGHT 100
+#define WINDOW_WIDTH 1500
+#define WINDOW_HEIGHT 900
 
 typedef struct t_color
 {
@@ -105,3 +105,5 @@ long	ft_atoi(const char *nptr);
 // EXECUTION
 
 void init_mlx(t_data *data);
+int close_window(t_data *data);
+int manage_window(int keycode, t_data *data);

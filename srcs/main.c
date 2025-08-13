@@ -24,17 +24,11 @@ int main(int argc, char **argv)
 	ft_init_data(data, argv);
 	if (parsing(data) == 0)
 	{
-		printf("NO : %s\n", data->NO_texture);
-		printf("SO : %s\n", data->SO_texture);
-		printf("WE : %s\n", data->WE_texture);
-		printf("EA : %s\n", data->EA_texture);
-		printf("F : %s\n", data->F_color);
-		printf("C : %s\n", data->C_color);
-		printf("colorrrr f : %ld, %ld, %ld\n",data->floor->r, data->floor->g, data->floor->b);
-		printf("colorrrr c : %ld, %ld, %ld\n",data->ceiling->r, data->ceiling->g, data->ceiling->b);
-		// init_mlx(data);
+		init_mlx(data);
+		mlx_hook(data->mlx->win, 17, 0, close_window, data);
+		mlx_hook(data->mlx->win , 2, 1L << 0, manage_window, data);
+		mlx_loop(data->mlx->mlx);
 	}
-	
 	ft_free_data(data);
 	return 0;
 }
