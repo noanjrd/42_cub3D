@@ -35,11 +35,13 @@ void	ft_init_data(t_data *data, char **argv)
 	t_color *ceiling;
 	t_color *floor;
 	t_mlx *mlx;
+	t_player *player;
 
 	map = malloc(sizeof(t_map));
 	mlx = malloc(sizeof(t_mlx));
 	ceiling = malloc(sizeof(t_color));
 	floor = malloc(sizeof(t_color));
+	player = malloc(sizeof(t_player));
 	data->NO_texture = NULL;
 	data->WE_texture = NULL;
 	data->EA_texture = NULL;
@@ -50,6 +52,7 @@ void	ft_init_data(t_data *data, char **argv)
 	data->ceiling  =ceiling;
 	data->floor = floor;
 	data->mlx = mlx;
+	data->player = player;
 	ft_init_map(map, argv);
 	return ;
 }

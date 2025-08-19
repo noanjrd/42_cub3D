@@ -25,8 +25,10 @@ int main(int argc, char **argv)
 	if (parsing(data) == 0)
 	{
 		init_mlx(data);
+		init_player(data);
 		mlx_hook(data->mlx->win, 17, 0, close_window, data);
 		mlx_hook(data->mlx->win , 2, 1L << 0, manage_window, data);
+		mlx_loop_hook(data->mlx->mlx, calcul_display, data);
 		mlx_loop(data->mlx->mlx);
 	}
 	ft_free_data(data);

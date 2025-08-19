@@ -13,6 +13,27 @@ void free_map(t_map *map)
     free(map->map);
 }
 
+int calcul_display(t_data *data)
+{
+    char *pixel_addr;
+    int x;
+    int y;
+
+    y = 0;
+    while(y < WINDOW_HEIGHT)
+    {
+        x = 0;
+        while(x < WINDOW_WIDTH)
+        {
+            pixel_addr = data->mlx->addr + (y * data->mlx->line_length + x * 4);
+            *(unsigned int *)pixel_addr = 0xFFFF0000;
+            x++;
+        }
+        y++;
+    }
+    mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, data->mlx->img, 0, 0);
+}
+
 void destroy_window(t_data *data)
 {
     mlx_destroy_image(data->mlx->mlx, data->mlx->img);
@@ -30,6 +51,7 @@ void destroy_window(t_data *data)
     free(data->WE_texture);
     free(data->EA_texture);
     free(data);
+    free(data->player);
     exit(0);
 }
 int close_window(t_data *data)

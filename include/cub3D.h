@@ -56,6 +56,17 @@ typedef struct t_map
 	char *l;
 } t_map;
 
+typedef struct t_player
+{
+	double x; //position x sur la carte
+	double y; // position y sur la carte
+	double dir_x; // vecteur direction x
+	double dir_y; //vecteur direction y
+	double plane_x; //plan camera x
+	double plane_y; //plan camera y
+	char spawn;
+} t_player;
+
 typedef struct t_data
 {
 	char *NO_texture;
@@ -68,6 +79,7 @@ typedef struct t_data
 	t_color *ceiling;
 	t_color *floor;
 	t_mlx *mlx;
+	t_player *player;
 } t_data;
 
 
@@ -107,3 +119,7 @@ long	ft_atoi(const char *nptr);
 void init_mlx(t_data *data);
 int close_window(t_data *data);
 int manage_window(int keycode, t_data *data);
+int calcul_display(t_data *data);
+void init_position(t_data *data);
+void init_player(t_data *data);
+void init_dir(t_data *data);

@@ -5,6 +5,7 @@ RM = rm -rf
 
 SRCS = srcs/main.c\
 	srcs/utils/utils.c\
+	srcs/utils/player_utils.c\
 	srcs/utils/utils2.c\
 	srcs/utils/libft.c\
 	srcs/utils/free.c\

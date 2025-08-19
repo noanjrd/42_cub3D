@@ -24,3 +24,10 @@ void init_mlx(t_data *data)
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img,
 			&data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
 }
+
+void init_player(t_data *data)
+{
+	init_position(data);
+	
+	return;
+}
