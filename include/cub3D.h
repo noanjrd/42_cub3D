@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:38:26 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/19 17:17:03 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct t_map
 
 typedef struct t_player
 {
-	double x; //position x sur la carte
-	double y; // position y sur la carte
+	double x; //position x sur la carte (col)
+	double y; // position y sur la carte (ligne)
 	double dir_x; // vecteur direction x
 	double dir_y; //vecteur direction y
 	double plane_x; //plan camera x
@@ -123,3 +123,4 @@ int calcul_display(t_data *data);
 void init_position(t_data *data);
 void init_player(t_data *data);
 void init_dir(t_data *data);
+void 	init_plane(t_data *data);

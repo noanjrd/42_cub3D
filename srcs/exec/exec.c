@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/07/28 14:19:28 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/19 17:39:48 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void init_mlx(t_data *data)
 void init_player(t_data *data)
 {
 	init_position(data);
-	
+	init_dir(data);
+	init_plane(data);
 	return;
 }

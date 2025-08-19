@@ -20,6 +20,7 @@ int calcul_display(t_data *data)
     int y;
 
     y = 0;
+	init_player(data);
     while(y < WINDOW_HEIGHT)
     {
         x = 0;
