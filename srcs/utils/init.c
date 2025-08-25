@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/08/01 16:00:59 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/25 14:02:19 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	ft_init_map(t_map *map, char **argv)
 	map->map_length = 0;
 	map->nb_player = 0;
 	map->map = NULL;
+}
+
+void	ft_init_game(t_game *game)
+{
+	game->oldTime = 0;
+	game->time = 0;
 }
 
 void	player_direction( t_player *player, char direction)
@@ -85,12 +91,14 @@ void	ft_init_data(t_data *data, char **argv)
 	t_color *floor;
 	t_mlx *mlx;
 	t_player *player;
+	t_game *game;
 
 	map = malloc(sizeof(t_map));
 	mlx = malloc(sizeof(t_mlx));
 	ceiling = malloc(sizeof(t_color));
 	floor = malloc(sizeof(t_color));
 	player = malloc(sizeof(t_player));
+	game = malloc(sizeof(t_game));
 	data->NO_texture = NULL;
 	data->WE_texture = NULL;
 	data->EA_texture = NULL;
@@ -101,7 +109,9 @@ void	ft_init_data(t_data *data, char **argv)
 	data->ceiling  =ceiling;
 	data->floor = floor;
 	data->mlx = mlx;
+	data->game = game;
 	data->player = player;
+	ft_init_game(data->game);
 	ft_init_map(map, argv);
 	return ;
 }

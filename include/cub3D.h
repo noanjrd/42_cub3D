@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/01 16:09:08 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/25 15:14:53 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ typedef struct s_player
 	double planeY;
 } t_player;
 
+
+typedef struct t_game
+{
+	double time;
+	double oldTime;
+} t_game;
+
 typedef struct t_data
 {
 	char *NO_texture;
@@ -81,6 +88,7 @@ typedef struct t_data
 	t_color *floor;
 	t_mlx *mlx;
 	t_player *player;
+	t_game *game;
 } t_data;
 
 
@@ -119,4 +127,4 @@ long	ft_atoi(const char *nptr);
 
 void	ft_init_player( t_player *player, char **map);
 void init_mlx(t_data *data);
-void raycasting(t_data *data, t_mlx *mlx);
+void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player);

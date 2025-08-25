@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/08/01 16:27:18 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/25 16:08:02 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	return ;
 // }
 
-void raycasting(t_data *data, t_mlx *mlx)
+void draw_floor_ceiling(t_data *data, t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -39,8 +39,25 @@ void raycasting(t_data *data, t_mlx *mlx)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win,
-		mlx->img, 0, 0);
-		
+}
+
+void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
+{
+	draw_floor_ceiling(data, mlx);
+
+	int x;
+
+	while(!done())
+	{
+		int w = 0;
+		for(int x = 0; x < w; x++)
+		{
+			double cameraX = 2 * x / (double)w - 1;
+			double rayDirX = player->dirX + player->planeX * cameraX;
+			double rayDirY = player->dirY + player->planeY * cameraX;
+		}
+		mlx_put_image_to_window(mlx->mlx, mlx->win,
+			mlx->img, 0, 0);
+	}
 	mlx_loop(mlx->mlx);
 }
