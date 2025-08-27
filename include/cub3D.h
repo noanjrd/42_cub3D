@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/25 15:14:53 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/27 14:05:27 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
 #define NOT_RGB "The color of the ceiling doesn't have a rgb format."
 #define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
+
 
 typedef struct t_color
 {
@@ -60,11 +61,11 @@ typedef struct t_map
 
 typedef struct s_player
 {
-	double posX;
+	double posX; // cordonne du joueur
 	double posY;
-	double dirX;
+	double dirX; // represnte le rayon du milieu de l ecran 
 	double dirY;
-	double planeX;
+	double planeX; // represnte la fov
 	double planeY;
 } t_player;
 
@@ -73,6 +74,11 @@ typedef struct t_game
 {
 	double time;
 	double oldTime;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	double deltaDistX;
+	double deltaDistY;
 } t_game;
 
 typedef struct t_data
