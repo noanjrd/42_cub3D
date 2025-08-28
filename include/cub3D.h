@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/27 14:05:27 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/28 12:08:59 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../mlx_linux/mlx.h"
 #include "../mlx_linux/mlx_int.h"
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>

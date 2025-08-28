@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/08/27 11:20:28 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/28 13:10:10 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@ void	player_direction( t_player *player, char direction)
 {
 	if (direction == 'N')
 	{
-		player->dirX = 0;
-		player->dirY = -1;
+		player->dirX = 1;
+		player->dirY = 0;
 	}
 	if (direction == 'S')
-	{
-		player->dirX = 0;
-		player->dirY = 1;
-	}
-	if (direction == 'W')
 	{
 		player->dirX = -1;
 		player->dirY = 0;
 	}
+	if (direction == 'W')
+	{
+		player->dirX = 0;
+		player->dirY = -1;
+	}
 	if (direction == 'E')
 	{
-		player->dirX = 1;
-		player->dirY = 0;
+		player->dirX = 0;
+		player->dirY = 1;
 	}
 }
 
