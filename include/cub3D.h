@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/28 12:08:59 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/29 12:24:39 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ typedef struct t_color
 	long color;
 }	t_color;
 
+typedef struct t_texture
+{
+	void	*img;
+	char	*addr;
+	int	width;
+	int	height;
+	int	bits_per_pixel;
+	int	line_length;
+	int	endian;
+} t_texture;
 
 typedef struct t_mlx
 {
@@ -73,7 +83,6 @@ typedef struct s_player
 
 typedef struct t_game
 {
-	double time;
 	double oldTime;
 	double cameraX;
 	double rayDirX;
@@ -90,6 +99,10 @@ typedef struct t_data
 	char *EA_texture;
 	char *F_color;
 	char *C_color;
+	t_texture *NO;
+	t_texture *SO;
+	t_texture *WE;
+	t_texture *EA;
 	t_map *map;
 	t_color *ceiling;
 	t_color *floor;
@@ -133,5 +146,6 @@ long	ft_atoi(const char *nptr);
 // EXECUTION
 
 void	ft_init_player( t_player *player, char **map);
-void init_mlx(t_data *data);
-void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player);
+void	init_mlx(t_data *data);
+void	raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player);
+int	ft_destroy_window(t_data *data);

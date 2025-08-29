@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/08/28 13:10:10 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/29 15:17:18 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,43 @@ void	ft_init_map(t_map *map, char **argv)
 
 void	ft_init_game(t_game *game)
 {
-	game->oldTime = 0;
-	game->time = 0;
+	game->deltaDistX = 0;
+	game->cameraX = 0;
+	game->deltaDistY = 0;
+	game->rayDirX = 0;
+	game->rayDirY = 0;
 }
 
 void	player_direction( t_player *player, char direction)
 {
 	if (direction == 'N')
 	{
-		player->dirX = 1;
-		player->dirY = 0;
+		player->dirX = 0;
+		player->dirY = -1;
+		player->planeX = 0.66;
+		player->planeY = 0;
+
 	}
 	if (direction == 'S')
 	{
-		player->dirX = -1;
-		player->dirY = 0;
+		player->dirX = 0;
+		player->dirY = 1;
+		player->planeX = -0.66;
+		player->planeY = 0;
 	}
 	if (direction == 'W')
 	{
-		player->dirX = 0;
-		player->dirY = -1;
+		player->dirX = -1;
+		player->dirY = 0;
+		player->planeX = 0;
+		player->planeY = -0.66;
 	}
 	if (direction == 'E')
 	{
-		player->dirX = 0;
-		player->dirY = 1;
+		player->dirX = 1;
+		player->dirY = 0;
+		player->planeX = 0;
+		player->planeY = 0.66;
 	}
 }
 
@@ -65,16 +77,15 @@ void	ft_init_player( t_player *player, char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player->posX = i;
-				player->posY = j;
+				player->posX = j + 0.5;
+				player->posY = i + 0.5 ;
 				player_direction(player, map[i][j]);
+				return ;
 			}
 			j++;
 		}
 		i++;
 	}
-	player->planeX = 0.66;
-	player->planeY = 0;
 }
 
 void	ft_init_mlx(t_mlx *mlx)

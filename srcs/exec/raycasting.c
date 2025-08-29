@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/08/28 14:35:04 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/29 15:13:20 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		int mapX = (int)player->posX;
 		int mapY = (int)player->posY;
 
-		// longueur de la position du joueur jusqu a la premiere intercetion			// il faut rajouter delta a chaque case apres
-		double sideDistX;
-		double sideDistY;
+		// longueur de la position du joueur jusqu a la premiere intercetion,	il faut rajouter delta a chaque case apres
+		double sideDistX = 0;
+		double sideDistY = 0;
 
 		// Longueur reel du rayon lorsque on parcour 1 case en x puis y
 		if (game->rayDirX != 0)
@@ -84,7 +84,8 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		}
 		while (hit == 0)
 		{
-			// on ajoute al distance x ou y et on incremente la map pour savoir si on touche un mur
+			// on ajoute la distance x ou y et on incremente la map pour savoir si on touche un mur
+			// donc a chque iteration ca change de if
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += game->deltaDistX;
@@ -97,16 +98,16 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 				mapY += stepY;
 				side = 1;
 			}
-			if (data->map->map[mapX][mapY] == '1')
+			if (data->map->map[mapY][mapX] == '1')
 				hit = 1;
 		}
-		if (side == 0) // si le mur est un NS on supprime 1 distance en trop
+		if (side == 0) // si le mur est un WE on supprime 1 distance en trop
 			perpWallDist = (sideDistX - game->deltaDistX);
 		else
-			perpWallDist = (sideDistY - game->deltaDistY);
-			
+			perpWallDist = (sideDistY - game->deltaDistY);	
+
+
 		int h = WINDOW_HEIGHT;
-			
 			
 		int lineHeight = (int)(h / perpWallDist);
 
@@ -116,18 +117,52 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		int drawEnd = lineHeight / 2 + h / 2;
 		if(drawEnd >= h)
 			drawEnd = h - 1;
-			
-		color = 0x88AAFF;
-			
-		if (side == 1) // si le mur est EO alors on divise par 2 la couleur pour lui afire d el ombre
-			color = color /  (perpWallDist * 1.1);
+
 		for (int y = 0; y <= drawStart; y++)
 			my_mlx_pixel_put(mlx, x, y, data->ceiling->color);
-		for (int y = drawStart; y <= drawEnd; y++)
-			my_mlx_pixel_put(mlx, x, y, color);
 		for (int y = drawEnd; y < WINDOW_HEIGHT ; y++)
 			my_mlx_pixel_put(mlx, x, y, data->floor->color);
+
+
+		double wallX; // position exacte du hit sur le mur
+		if (side == 0) // mur nord ou sud donc on a avance x pour le touche
+			wallX = player->posY + perpWallDist * game->rayDirY; // calcul du cordonne Y de l impact
+		else
+			wallX = player->posX + perpWallDist * game->rayDirX;
+		wallX -= floor(wallX); // arrondi au nombre en dessous
+
+		// coordonnée X dans la texture
+		int texX = (int)(wallX * (double)data->NO->width); // prjecte les cordonne u sur la texture
+		if (side == 0 && game->rayDirX > 0) 
+			texX = data->NO->width - texX - 1;
+		if (side == 1 && game->rayDirY < 0)
+			texX = data->NO->width - texX - 1;
+
+		double step = 1.0 * data->NO->height / lineHeight; // hauteur de la bande a dessine
+		double texPos = (drawStart - h / 2 + lineHeight / 2) * step; // 
+
+		for (int y = drawStart; y <= drawEnd; y++)
+		{
+			int texY = (int)texPos % (data->NO->height - 1); // modulo hauteur texture
+			texPos += step;
+			char *pixel;
+			if (side == 0 && stepX == -1)
+				pixel = data->WE->addr + (texY * data->WE->line_length + texX * (data->WE->bits_per_pixel / 8));
+			if (side == 0 && stepX == 1)
+				pixel = data->EA->addr + (texY * data->EA->line_length + texX * (data->EA->bits_per_pixel / 8));
+			if (side == 1 && stepY == -1)
+				pixel = data->NO->addr + (texY * data->NO->line_length + texX * (data->NO->bits_per_pixel / 8));
+			if (side == 1 && stepY == 1)
+				pixel = data->SO->addr + (texY * data->SO->line_length + texX * (data->SO->bits_per_pixel / 8));
+			int texColor = *(unsigned int*)pixel;
+
+			if (side == 1) // assombrir les murs Nord/Sud
+				texColor = (texColor >> 1) & 0x7F7F7F; // ou 0x7F7F7F (aka 8355711)
+
+			my_mlx_pixel_put(mlx, x, y, texColor);
+		}
 		x++;
+
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }

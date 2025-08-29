@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:40:17 by njard            ###   ########.fr       */
+/*   Updated: 2025/08/29 12:02:08 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int check_first_param(t_data *data)
 	}
 	return (0);
 }
+
+
 
 int open_textures(t_data *data)
 {
