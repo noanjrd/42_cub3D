@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:17:35 by njard             #+#    #+#             */
-/*   Updated: 2025/08/29 11:48:18 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 11:13:04 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void ft_free_tab(char **tab)
 
 void ft_free_mlx(t_mlx *mlx)
 {
-	free(mlx->addr);
+	// free(mlx->addr);
 	free(mlx->mlx);
 	free(mlx);
 	return ;
@@ -55,6 +55,17 @@ int ft_destroy_window(t_data *data)
 	return 0;
 }
 
+void	ft_free_texture(t_texture *tex)
+{
+	// mlx_destroy_image(data->mlx->mlx, data->mlx->img);
+	// mlx_destroy_window(data->mlx->mlx, data->mlx->win);
+	// mlx_loop_end(data->mlx->mlx);
+	// mlx_destroy_display(data->mlx->mlx);
+	free(tex->img);
+	// free(tex->addr);
+	free(tex);
+}
+
 void ft_free_data(t_data *data)
 {
 	free(data->C_color);
@@ -69,5 +80,9 @@ void ft_free_data(t_data *data)
 	free(data->player);
 	ft_free_map(data->map);
 	ft_free_mlx(data->mlx);
+	ft_free_texture(data->EA);
+	ft_free_texture(data->WE);
+	ft_free_texture(data->NO);
+	ft_free_texture(data->SO);
 	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/08/29 15:17:18 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 11:25:30 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	ft_init_game(t_game *game)
 	game->rayDirY = 0;
 }
 
-void	player_direction( t_player *player, char direction)
+void	player_direction( t_player *player, char direction) // ici par convention les y sont inverse car on prend le systeme d affichage d une fentre ou tout en haut et 0,0 et eb bas 0,-1
 {
 	if (direction == 'N')
 	{
 		player->dirX = 0;
 		player->dirY = -1;
-		player->planeX = 0.66;
+		player->planeX = 0.66; // le plane est perpendiculaire au vectrueur de directiion et est sur un repere orthonorme lui, de plus on prend le vecteur de fov a droite de l ecran pour le plane
 		player->planeY = 0;
 
 	}

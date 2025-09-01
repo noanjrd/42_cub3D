@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/08/29 15:36:15 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 12:32:49 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	mouse_hook(int button, int x, int y, void *param)
 {
 	t_data	*data;
 
-	// printf("%d\n", button);
+	printf("%d\n", button);
 
 	// printf("%d\n", x);
 	(void)x;
@@ -84,22 +84,34 @@ int	key_action(int key, t_data *data)
 	if (key == 97)
 	{
 		if ((data->map->map)[(int)(data->player->posY)][(int)(data->player->posX - 0.2)] != '1')
-			data->player->posX -= 0.1;
+		{
+			data->player->posX -= data->player->planeX * 0.1;
+			data->player->posY -= data->player->planeY *0.1;
+		}
 	}
 	if (key == 100)
 	{
 		if ((data->map->map)[(int)(data->player->posY)][(int)(data->player->posX + 0.2)] != '1')
-			data->player->posY += 0.1;
+		{
+			data->player->posX += data->player->planeX * 0.1;
+			data->player->posY += data->player->planeY *0.1;
+		}
 	}
 	if (key == 119)
 	{
 		if ((data->map->map)[(int)(data->player->posY + 0.2)][(int)(data->player->posX)] != '1')
-			data->player->posY -= 0.1;
+		{
+			data->player->posX += data->player->dirX * 0.1;
+			data->player->posY += data->player->dirY *0.1;
+		}
 	}
 	if (key == 115)
 	{
 		if ((data->map->map)[(int)(data->player->posY - 0.2)][(int)(data->player->posX)] != '1')
-			data->player->posY -= 0.1;
+		{
+			data->player->posX -= data->player->dirX * 0.1;
+			data->player->posY -= data->player->dirY *0.1;
+		}
 	}
 	if (key == 65363)
 	{
