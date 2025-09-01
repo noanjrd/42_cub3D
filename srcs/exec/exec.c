@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/09/01 12:32:49 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:30:06 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	key_action(int key, t_data *data)
 	printf("%d\n", key);
 	if (key == 97)
 	{
-		if ((data->map->map)[(int)(data->player->posY)][(int)(data->player->posX - 0.2)] != '1')
+		if ((data->map->map)[(int)(data->player->posY - data->player->planeY *0.1)][(int)(data->player->posX - data->player->planeX * 0.1)] != '1')
 		{
 			data->player->posX -= data->player->planeX * 0.1;
 			data->player->posY -= data->player->planeY *0.1;
@@ -91,7 +91,7 @@ int	key_action(int key, t_data *data)
 	}
 	if (key == 100)
 	{
-		if ((data->map->map)[(int)(data->player->posY)][(int)(data->player->posX + 0.2)] != '1')
+		if ((data->map->map)[(int)(data->player->posY + data->player->planeY *0.1)][(int)(data->player->posX + data->player->planeX * 0.1)] != '1')
 		{
 			data->player->posX += data->player->planeX * 0.1;
 			data->player->posY += data->player->planeY *0.1;
@@ -99,7 +99,7 @@ int	key_action(int key, t_data *data)
 	}
 	if (key == 119)
 	{
-		if ((data->map->map)[(int)(data->player->posY + 0.2)][(int)(data->player->posX)] != '1')
+		if ((data->map->map)[(int)(data->player->posY + data->player->dirY *0.1)][(int)(data->player->posX + data->player->dirX * 0.1)] != '1')
 		{
 			data->player->posX += data->player->dirX * 0.1;
 			data->player->posY += data->player->dirY *0.1;
@@ -107,7 +107,7 @@ int	key_action(int key, t_data *data)
 	}
 	if (key == 115)
 	{
-		if ((data->map->map)[(int)(data->player->posY - 0.2)][(int)(data->player->posX)] != '1')
+		if ((data->map->map)[(int)(data->player->posY - data->player->dirY *0.1)][(int)(data->player->posX - data->player->dirX * 0.1)] != '1')
 		{
 			data->player->posX -= data->player->dirX * 0.1;
 			data->player->posY -= data->player->dirY *0.1;
@@ -146,6 +146,9 @@ void	ft_create_texture(t_data *data)
 	WE = malloc(sizeof(t_texture));
 	EA = malloc(sizeof(t_texture));
 	SO = malloc(sizeof(t_texture));
+	if (!NO || !WE || !EA || !SO)
+		return; 
+
 
 	data->EA = EA;
 	data->SO = SO;

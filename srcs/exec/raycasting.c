@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/09/01 12:18:25 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 15:29:52 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,15 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		h = WINDOW_HEIGHT;
 			
 		int lineHeight;
-		lineHeight = (int)(h / perpWallDist);
+		lineHeight = (int)(h / perpWallDist); //on met la hauteur du mur a la bonne unite
 
 		int drawStart;
 		int drawEnd;
-		drawStart= -lineHeight / 2 + h / 2;
+
+		drawStart= (- lineHeight / 2) + h / 2; // diferent calcul ici car il y a des problemes dans le cas ou perpWallDist est super petit donc que lineheight est super grand
+		drawEnd = h - (h - lineHeight) / 2;
 		if(drawStart < 0)
 			drawStart = 0;
-		drawEnd = lineHeight / 2 + h / 2;
 		if(drawEnd >= h)
 			drawEnd = h - 1;
 
@@ -136,23 +137,29 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 
 		double wallX; // position exacte du hit sur le mur
 		if (side == 0) // mur west ou east donc on a avance x pour le touche
-			wallX = player->posY + perpWallDist * game->rayDirY; // calcul du cordonne Y de l impact : position du joueur + (distance du rayon × direction du rayon)
+			wallX = player->posY + (perpWallDist * game->rayDirY); // calcul du cordonne Y de l impact : position du joueur + (distance du rayon × direction du rayon)
 		else
-			wallX = player->posX + perpWallDist * game->rayDirX;
+			wallX = player->posX + (perpWallDist * game->rayDirX);
 		wallX -= floor(wallX); //garde la parti fractionnaire pour savoir entre 0 et 1 ou le mur a ete frappe
+		// floor arrondi a l entier inferieur
 
 		// coordonnée X dans la texture
-		int texX = (int)(wallX * (double)data->NO->width); // on convertiu la texture en la bonne unite
+		int texX = (int)(wallX * (double)data->NO->width); // on le point d impact a l ednroit de l impact de la texture
 		if (side == 1 && game->rayDirY > 0) // on remet la texture dans le bon sens pour sud
 			texX = data->NO->width - texX - 1;
 
-		double step = 1.0 * data->NO->height / lineHeight; // hauteur de la bande a dessine
-		double texPos = (drawStart - h / 2 + lineHeight / 2) * step; // 
+		double step;
+		step = (double)data->NO->height / (double)lineHeight; // combien de pixel de texture il faut pour 1 pixel de la ligne
 
-		for (int y = drawStart; y <= drawEnd; y++)
+		double texPos;
+		texPos = (drawStart - h / 2 + lineHeight / 2) * step; // calcul le point de depart a l ecran du premier pixel
+
+		for (int y = drawStart; y <= drawEnd; y++) // parcour la ligne verticalement
 		{
-			int texY = (int)texPos % (data->NO->height - 1); // modulo hauteur texture
+			int texY;
+			texY = (int)texPos; // % (data->NO->height - 1); // cordonne y dans la texture
 			texPos += step;
+
 			char *pixel;
 			if (side == 0 && stepX == -1)
 				pixel = data->WE->addr + (texY * data->WE->line_length + texX * (data->WE->bits_per_pixel / 8));
@@ -162,11 +169,8 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 				pixel = data->NO->addr + (texY * data->NO->line_length + texX * (data->NO->bits_per_pixel / 8));
 			if (side == 1 && stepY == 1)
 				pixel = data->SO->addr + (texY * data->SO->line_length + texX * (data->SO->bits_per_pixel / 8));
-			int texColor = *(unsigned int*)pixel;
-
-			if (side == 1) // assombrir les murs Nord/Sud
-				texColor = (texColor >> 1) & 0x7F7F7F; // ou 0x7F7F7F (aka 8355711)
-
+			int texColor;
+			texColor = *(unsigned int*)pixel;
 			my_mlx_pixel_put(mlx, x, y, texColor);
 		}
 		x++;
@@ -174,3 +178,5 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
+
+//il y a une seg fault si on avance dans les murs

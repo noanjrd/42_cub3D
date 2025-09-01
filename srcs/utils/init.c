@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/09/01 11:25:30 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/01 18:51:03 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_init_mlx(t_mlx *mlx)
 	mlx->addr = NULL;
 	mlx->win = NULL;
 	mlx->img = NULL;
+	mlx->mlx = NULL;
 }
 
 void	ft_init_data(t_data *data, char **argv)
@@ -122,6 +123,7 @@ void	ft_init_data(t_data *data, char **argv)
 	data->mlx = mlx;
 	data->game = game;
 	data->player = player;
+	ft_init_mlx(data->mlx);
 	ft_init_game(data->game);
 	ft_init_map(map, argv);
 	return ;
