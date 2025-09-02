@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/09/01 15:29:52 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/02 11:09:09 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 {
-	int x = 0;
-
-	int check = 0;
+	int x;
 	int color;
+
+	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
 		game->cameraX = 2 * x / (double)WINDOW_WIDTH - 1; // mettre la camera entre -1 et 1
@@ -34,17 +34,18 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		game->rayDirY = player->dirY + (player->planeY * game->cameraX);
 
 		int mapX;
-		mapX = (int)player->posX; // on arrondi en coupant la parti decimal (donc on arrondi en dessous sans tous les cas)
 		int mapY;
+		mapX = (int)player->posX; // on arrondi en coupant la parti decimal (donc on arrondi en dessous sans tous les cas)
 		mapY = (int)player->posY;
 
 		// longueur de la position du joueur jusqu a la premiere intercetion,	il faut rajouter delta a chaque case apres
 		double sideDistX;
-		sideDistX  = 0;
 		double sideDistY;
+		sideDistX  = 0;
 		sideDistY = 0;
 
 		// Longueur reel du rayon lorsque on parcour 1 case en x puis y
+		// fabs retourne la valeur absolue
 		if (game->rayDirX != 0)
 			game->deltaDistX = fabs(1 / game->rayDirX); 
 		else
@@ -55,15 +56,13 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 			game->deltaDistY = 100000000.0;
 
 		double perpWallDist;
-
-		// quel est lq direction de x et y (y etant toujours inverse)
-		int stepX;
+		int stepX; // quel est lq direction de x et y (y etant toujours inverse)
 		int stepY;
-
-		int hit;
-		hit = 0; //se met a 1 si un mur est touche
 		int side; // quelles face a ete touche, soit side == 0 c est WE ou l autre SN
+		int hit;
 
+		hit = 0; //se met a 1 si un mur est touche
+		
 		// calcul de la longueur du rayon jusqu au premier  mur
 		if (game->rayDirX < 0) // le rayon part vers la gauche 
 		{
@@ -152,7 +151,7 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		step = (double)data->NO->height / (double)lineHeight; // combien de pixel de texture il faut pour 1 pixel de la ligne
 
 		double texPos;
-		texPos = (drawStart - h / 2 + lineHeight / 2) * step; // calcul le point de depart a l ecran du premier pixel
+		texPos = (drawStart - (h / 2) + (lineHeight / 2)) * step; // calcul le point de depart a l ecran du premier pixel
 
 		for (int y = drawStart; y <= drawEnd; y++) // parcour la ligne verticalement
 		{
@@ -174,9 +173,6 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 			my_mlx_pixel_put(mlx, x, y, texColor);
 		}
 		x++;
-
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
-
-//il y a une seg fault si on avance dans les murs

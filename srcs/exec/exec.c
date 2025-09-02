@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/09/01 18:30:06 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/02 11:27:02 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ int	mouse_hook(int button, int x, int y, void *param)
 {
 	t_data	*data;
 
-	printf("%d\n", button);
-
-	// printf("%d\n", x);
+	// printf("%d\n", button);
 	(void)x;
 	(void)y;
 	data = (t_data *)param;
-
 	if (button == 5)
 		data->player->planeX += 0.1;
 
@@ -34,8 +31,6 @@ int	mouse_hook(int button, int x, int y, void *param)
 	
 	if (button == 4)
 		data->player->planeX -= 0.1;
-	// else if (button == 4)
-	// 	fractal->zoom *= 0.9;
 	raycasting(data, data->mlx, data->game, data->player);
 	return (0);
 }
@@ -46,8 +41,6 @@ int	mouse_move( int x, int y, void *param)
 
 
 	// printf("%d\n", x);
-	// (void)x;
-	// (void)y;
 	double oldDirX;
 	double oldPlaneX;
 	double Degree;
@@ -142,14 +135,13 @@ void	ft_create_texture(t_data *data)
 	t_texture *WE;
 	t_texture *EA;
 	t_texture *SO;
+
 	NO = malloc(sizeof(t_texture));
 	WE = malloc(sizeof(t_texture));
 	EA = malloc(sizeof(t_texture));
 	SO = malloc(sizeof(t_texture));
 	if (!NO || !WE || !EA || !SO)
 		return; 
-
-
 	data->EA = EA;
 	data->SO = SO;
 	data->NO = NO;
@@ -185,11 +177,6 @@ void init_mlx(t_data *data)
 	mlx_key_hook(data->mlx->win, key_action, data);
 	mlx_mouse_hook(data->mlx->win, mouse_hook, data);
 	mlx_hook(data->mlx->win, 17, 0, ft_destroy_window, data);
-	// mlx_mouse_move(data->mlx->mlx, data->mlx->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-
-	
-	// mlx_hook(data->mlx->win, 500, 0, mouse_move_right, data);
-	// mlx_hook(data->mlx->win, 17, 0, on_destroy_event, data);
 	mlx_loop(data->mlx->mlx);
-
+	return ;
 }
