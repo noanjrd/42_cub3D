@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <math.h>
 
 #define PARAM_WRITTEN "One of the parameters is not correctly written"
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
@@ -43,6 +44,7 @@ typedef struct t_mlx
 	int		number;
 	int		bits_per_pixel;
 	int		line_length;
+	int		line_height;
 	int		endian;
 } t_mlx;
 
@@ -64,7 +66,16 @@ typedef struct t_player
 	double dir_y; //vecteur direction y
 	double plane_x; //plan camera x
 	double plane_y; //plan camera y
+	double ray_dir_y;
+	double ray_dir_x;
+	double camera_x;
+	double delta_x;
+    double delta_y;
+	int hit;
+	int map_x;
+	int map_y;
 	char spawn;
+	double perp_wall_dist;
 } t_player;
 
 typedef struct t_data
@@ -124,3 +135,7 @@ void init_position(t_data *data);
 void init_player(t_data *data);
 void init_dir(t_data *data);
 void 	init_plane(t_data *data);
+double cast_ray (t_data *data, double ray_dir_x, double ray_dir_y);
+void draw_column(t_data *data,int x, int draw_start, int draw_end);
+int key_action(int keycode, t_data *data);
+void calcul_player(t_data *data);

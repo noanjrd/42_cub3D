@@ -15,24 +15,26 @@ void free_map(t_map *map)
 
 int calcul_display(t_data *data)
 {
-    char *pixel_addr;
-    int x;
-    int y;
-
-    y = 0;
-	init_player(data);
-    while(y < WINDOW_HEIGHT)
+    int x = 0;
+    double wall_dist;
+    int draw_start;
+    int draw_end;
+    
+    // calcul_player(data);
+    while (x < WINDOW_WIDTH)
     {
-        x = 0;
-        while(x < WINDOW_WIDTH)
-        {
-            pixel_addr = data->mlx->addr + (y * data->mlx->line_length + x * 4);
-            *(unsigned int *)pixel_addr = 0xFFFF0000;
-            x++;
-        }
-        y++;
+        data->player->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+        data->player->ray_dir_x = data->player->dir_x + data->player->plane_x * data->player->camera_x;
+        data->player->ray_dir_y = data->player->dir_y + data->player->plane_y * data->player->camera_x;
+        wall_dist = cast_ray(data, data->player->ray_dir_x, data->player->ray_dir_y);
+        data->mlx->line_height = (int)(WINDOW_HEIGHT / wall_dist);
+        draw_start = -(data->mlx->line_height) / 2 + WINDOW_HEIGHT / 2;
+        draw_end = data->mlx->line_height / 2 + WINDOW_HEIGHT / 2;
+        draw_column(data, x, draw_start, draw_end);
+        x++;
     }
     mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, data->mlx->img, 0, 0);
+    return (0);
 }
 
 void destroy_window(t_data *data)
@@ -64,4 +66,29 @@ int manage_window(int keycode, t_data *data)
 {
     if (keycode == 65307)
         destroy_window(data);
+}
+
+int key_action(int keycode, t_data *data)
+{
+    printf("x = %f et y = %f", data->player->x, data->player->y);
+    if (keycode == 119)
+    {
+        data->player->y -= 0.2;
+        printf("W\n");
+    }
+    if (keycode == 115)
+    {
+        data->player->y += 0.2;
+        printf("S\n");        
+    }
+    if (keycode == 97)
+    {
+        data->player->x -= 0.2;
+        printf("A\n");        
+    }
+    if (keycode == 100)
+    {
+        data->player->x += 0.2;
+        printf("D\n");        
+    }
 }

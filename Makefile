@@ -21,7 +21,10 @@ SRCS = srcs/main.c\
 	srcs/parsing/getline.c\
 	srcs/parsing/getline2.c\
 	srcs/parsing/colors.c\
-	srcs/exec/exec.c srcs/exec/manage_window.c
+	srcs/exec/exec.c\
+	srcs/exec/manage_window.c\
+	srcs/exec/ray_casting.c\
+	srcs/exec/ray_casting2.c
 
 OBJS = ${SRCS:.c=.o}
 

@@ -32,3 +32,9 @@ void init_player(t_data *data)
 	init_plane(data);
 	return;
 }
+void calcul_player(t_data *data)
+{
+	init_dir(data);
+	init_plane(data);
+	return;
+}
