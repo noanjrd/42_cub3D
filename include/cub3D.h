@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/29 12:24:39 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/03 14:57:10 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,5 @@ long	ft_atoi(const char *nptr);
 
 void	ft_init_player( t_player *player, char **map);
 void	init_mlx(t_data *data);
-void	raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player);
+int	raycasting(t_data *data);
 int	ft_destroy_window(t_data *data);

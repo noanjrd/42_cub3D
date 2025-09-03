@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/09/02 11:09:09 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/03 14:57:03 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,26 @@ void my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	// printf("%d, %d\n", x , y);
+	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
+	{
+		dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+	}
 }
 
 
-void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
+int raycasting(t_data *data)
 {
 	int x;
 	int color;
+	t_game *game;
+	t_mlx *mlx;
+	t_player *player;
 
+	player = data->player;
+	game  = data->game;
+	mlx = data->mlx;
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
@@ -122,7 +132,7 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		int drawEnd;
 
 		drawStart= (- lineHeight / 2) + h / 2; // diferent calcul ici car il y a des problemes dans le cas ou perpWallDist est super petit donc que lineheight est super grand
-		drawEnd = h - (h - lineHeight) / 2;
+		drawEnd = ( lineHeight / 2) + h / 2;
 		if(drawStart < 0)
 			drawStart = 0;
 		if(drawEnd >= h)
@@ -175,4 +185,5 @@ void raycasting(t_data *data, t_mlx *mlx, t_game *game, t_player *player)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	return 0;
 }
