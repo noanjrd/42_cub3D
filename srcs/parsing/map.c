@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:28:02 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/03 20:35:32 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int skip_old_line(char *line)
 	return (0);
 }
 
-void	put_x_to_line(t_map *map, char *line, int z)
+void	put_x_to_line(t_map *map, int z)
 {
 	int i;
 	int len;
@@ -42,7 +42,7 @@ void	put_x_to_line(t_map *map, char *line, int z)
 	map->map[z][i] = 0;
 	if (z == (map->map_height + 1))
 	{
-		line = map->map[z + 1] = NULL;
+		map->map[z + 1] = NULL;
 	}
 	i = 0;
 	return ;
@@ -62,7 +62,7 @@ void get_line_map(t_map *map, int fd)
 	}
 	if (line)
 	{
-		put_x_to_line(map, line, 0);
+		put_x_to_line(map, 0);
 		copy_line_map(map, line, z, 0);
 	}
 	while (line)
@@ -73,7 +73,7 @@ void get_line_map(t_map *map, int fd)
 		if (line)
 			copy_line_map(map, line, z, 0);
 	}
-	put_x_to_line(map, line, (map->map_height + 1));
+	put_x_to_line(map, (map->map_height + 1));
 	ft_print_tab(map->map);
 }
 

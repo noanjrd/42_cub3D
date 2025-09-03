@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/03 14:57:10 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/03 20:58:48 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
+#define RIGHT 1
+#define LEFT 0
 
 
 typedef struct t_color
@@ -149,3 +151,8 @@ void	ft_init_player( t_player *player, char **map);
 void	init_mlx(t_data *data);
 int	raycasting(t_data *data);
 int	ft_destroy_window(t_data *data);
+int	key_action(int key, t_data *data);
+int check_wall(char **map, int y, int x);
+int	mouse_move( int x, int y, t_data *data);
+int	mouse_hook(int button, int x, int y, void *param);
+void change_direction(t_data *data, double degree);

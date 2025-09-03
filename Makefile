@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-FLAGS = -g3   #-fsanitize=address,leak
+FLAGS = -g3  #-Wall -Wextra -Werror #-fsanitize=address,leak
 RM = rm -rf
 
 SRCS = srcs/main.c\
@@ -21,6 +21,8 @@ SRCS = srcs/main.c\
 	srcs/parsing/getline2.c\
 	srcs/parsing/colors.c\
 	srcs/exec/exec.c\
+	srcs/exec/keyboard.c\
+	srcs/exec/mouse.c\
 	srcs/exec/raycasting.c
 
 OBJS = ${SRCS:.c=.o}
