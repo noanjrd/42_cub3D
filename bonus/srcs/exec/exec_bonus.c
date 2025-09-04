@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 14:15:40 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/04 13:22:25 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	init_mlx(t_data *data)
 			&data->mlx->line_length,
 			&data->mlx->endian);
 	ft_create_texture(data);
+	mlx_hook(data->mlx->win, 6, PointerMotionMask, mouse_move, data);
 	mlx_hook(data->mlx->win, 17, 0, ft_destroy_window, data);
+	mlx_mouse_hook(data->mlx->win, mouse_hook, data);
 	mlx_key_hook(data->mlx->win, key_action, data);
 	mlx_loop_hook(data->mlx->mlx, raycasting, data);
 	mlx_loop(data->mlx->mlx);

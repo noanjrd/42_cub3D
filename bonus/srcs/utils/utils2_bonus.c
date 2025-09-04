@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 13:46:13 by njard            ###   ########.fr       */
+/*   Created: 2025/07/16 13:57:31 by njard             #+#    #+#             */
+/*   Updated: 2025/07/16 14:39:39 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-// enlever le relink
-
-int	main(int argc, char **argv)
+long	ft_atoi(const char *nptr)
 {
-	t_data	*data;
+	long	i;
+	long	nb;
+	long	signe;
 
-	if (argc == 1)
-		return (ft_print_error("Miss an argument"), 0);
-	if (argc > 2)
-		return (ft_print_error("Too many arguments"), 0);
-	data = malloc(sizeof(t_data));
-	ft_init_data(data, argv);
-	if (parsing(data) == 0)
+	i = 0;
+	nb = 0;
+	signe = 1;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		ft_init_player(data->player, data->map->map);
-		init_mlx(data);
+		if (nptr[i] == '-')
+			signe = -1;
+		i++;
 	}
-	ft_free_data(data);
-	return (0);
+	while ((nptr[i] >= '0' && nptr[i] <= '9') && nptr[i] != '\0')
+	{
+		nb = nb * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (nb * signe);
 }
