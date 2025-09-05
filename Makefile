@@ -54,26 +54,26 @@ SRCS_BONUS = bonus/srcs/main_bonus.c \
 OBJS = ${SRCS:.c=.o}
 OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
-all: install $(NAME)
+all:install $(NAME)
 
 
-$(NAME): $(OBJS)
+$(NAME):  $(OBJS)
 	$(CC) $(FLAGS) $(OBJS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
-	make clean
 
-bonus: install  $(OBJS_BONUS)
-	$(CC) $(FLAGS) $(OBJS_BONUS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
-	make clean
+bonus:   $(OBJS_BONUS) install
+	@$(CC) $(FLAGS) $(OBJS_BONUS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
 
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 mlx_linux:
-	if [ ! -d "mlx_linux" ]; then \
+	@if [ ! -d "mlx_linux" ]; then \
 		git clone https://github.com/42Paris/minilibx-linux.git mlx_linux > /dev/null 2>&1; \
+	else \
+		echo "make: Nothing to be done for 'all'."; \
 	fi
-	make -C mlx_linux/ > /dev/null
+	@make -C mlx_linux/ > /dev/null
 
 install: mlx_linux
 
