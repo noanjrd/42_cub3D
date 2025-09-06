@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 12:58:24 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 14:16:40 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 18:39:00 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	check_length_line(t_map *map, char *line)
 	j = i;
 	while (line[j] && line[j] != '\n')
 		j++;
+	j--;
 	j--;
 	while ((line[j] == ' ' || (line[j] >= 7 && line[j] <= 13)))
 		j--;

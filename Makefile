@@ -70,8 +70,6 @@ bonus: install  $(OBJS_BONUS)
 mlx_linux:
 	@if [ ! -d "mlx_linux" ]; then \
 		git clone https://github.com/42Paris/minilibx-linux.git mlx_linux > /dev/null 2>&1; \
-	else \
-		echo "make: Nothing to be done for 'all'."; \
 	fi
 	@make -C mlx_linux/ > /dev/null
 

@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 14:42:29 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:22:27 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ long			ft_atoi(const char *nptr);
 void			ft_init_map(t_map *map, char **argv);
 void			ft_init_game(t_game *game);
 void			ft_init_mlx(t_mlx *mlx);
+void			ft_free_texture(t_mlx *mlx, t_texture *tex);
 
 // EXECUTION
 

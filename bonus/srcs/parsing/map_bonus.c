@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 14:24:35 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:04:47 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int	get_map(t_map *map, int fd)
 		if (line && ft_strcmp_space(line, "1") == 1)
 			map->map_height++;
 	}
+	if (map->map_height <= 2)
+		return (-1);
 	(map->map) = malloc((map->map_height + 3) * sizeof(char *));
 	if (get_map_next(map) == -1)
 		return (-1);

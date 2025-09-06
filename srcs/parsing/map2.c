@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 11:41:37 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:02:57 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	skip_trailing_whitespace(char *line, int i)
 
 static int	allocate_map_line(t_map *map, int z, int j)
 {
-	map->map[z] = malloc((j + 4 + (map->map_length - j)) * sizeof(char));
+	map->map[z] = malloc((j + 4 + (map->map_length)) * sizeof(char));
 	if (!map->map[z])
 		return (-1);
 	return (0);
