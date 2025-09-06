@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 19:27:55 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 19:29:39 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_mlx_texture(t_data *data, t_texture *tex, char *texture_file)
 	{
 		ft_print_error("Cannot load texture.");
 		ft_destroy_window(data);
-	}	
+	}
 	tex->addr = mlx_get_data_addr(tex->img,
 			&tex->bits_per_pixel,
 			&tex->line_length,
