@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 11:45:51 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 14:44:36 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	color_to_int(char *color_tab, t_color *color, int j)
+int	color_to_int(char *color_tab, t_color *color, int j, int i)
 {
-	int		i;
 	char	*tab;
 
-	i = 0;
-	tab = malloc(100);
+	tab = malloc(150);
 	while (color_tab[j] && color_tab[j] != ',')
 		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0)
-		return (-1);
+	if (color_tab[j] == 0 || i > 3)
+		return (free(tab), -1);
 	j++;
 	tab[i] = 0;
 	color->r = ft_atoi(tab);
 	i = 0;
 	while (color_tab[j] && color_tab[j] != ',')
 		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0)
-		return (-1);
+	if (color_tab[j] == 0 || i > 3)
+		return (free(tab), -1);
 	j++;
 	color->g = ft_atoi(tab);
 	i = 0;
 	while (color_tab[j] && color_tab[j] != ',')
 		tab[i++] = color_tab[j++];
+	if (i > 3)
+		return (free(tab), -1);
 	color->b = ft_atoi(tab);
 	return (free(tab), 0);
 }

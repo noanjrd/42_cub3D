@@ -60,7 +60,7 @@ all:install $(NAME)
 $(NAME):  $(OBJS)
 	$(CC) $(FLAGS) $(OBJS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
 
-bonus:   $(OBJS_BONUS) install
+bonus: install  $(OBJS_BONUS) 
 	@$(CC) $(FLAGS) $(OBJS_BONUS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
 
 

@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 14:19:55 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 14:25:22 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	get_line_map(t_map *map, int fd)
 	put_x_to_line(map, (map->map_height + 1));
 }
 
-void	get_map_next(t_map *map)
+int	get_map_next(t_map *map)
 {
 	int	fd2;
 	int	fd3;
@@ -85,16 +85,17 @@ void	get_map_next(t_map *map)
 	if (ft_check_map_error(map, fd2) == -1)
 	{
 		map->map[0] = NULL;
-		return (ft_print_error("There is an error regarding the map."));
+		return (-1);
 	}
 	fd3 = open(map->map_file, O_RDONLY, 0700);
 	get_line_map(map, fd3);
 	if (map->nb_player == 0 || map->nb_player >= 2)
-		return (ft_print_error("The number of players is incorrect."));
+		return (-1);
 	close(fd2);
+	return (0);
 }
 
-void	get_map(t_map *map, int fd)
+int	get_map(t_map *map, int fd)
 {
 	char	*line;
 
@@ -114,5 +115,7 @@ void	get_map(t_map *map, int fd)
 			map->map_height++;
 	}
 	(map->map) = malloc((map->map_height + 3) * sizeof(char *));
-	get_map_next(map);
+	if (get_map_next(map) == -1)
+		return (-1);
+	return (0);
 }

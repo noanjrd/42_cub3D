@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 12:00:05 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 15:06:56 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_copy_info(char *line)
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
 	j = i;
-	while (line[j] && line[j] != '\n')
+	while (line[j] && line[j] != ' ' && line[j] != '	' && line[j] != '\n')
 		j++;
 	j--;
 	while ((line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
@@ -106,9 +106,9 @@ int	parsing(t_data *data)
 	else if (check_map_closed(data->map) == 1)
 		return (close(fd), ft_print_error("The map is not closed"), -1);
 	close(fd);
-	if (color_to_int(data->f_color, data->floor, 0) == -1)
+	if (color_to_int(data->f_color, data->floor, 0, 0) == -1)
 		return (ft_print_error(WRONG_COLOR_FORMAT), -1);
-	if (color_to_int(data->c_color, data->ceiling, 0) == -1)
+	if (color_to_int(data->c_color, data->ceiling, 0, 0) == -1)
 		return (ft_print_error(NOT_RGB), -1);
 	if (check_good_format_color(data) == -1)
 		return (ft_print_error(NOT_A_BYTE), -1);

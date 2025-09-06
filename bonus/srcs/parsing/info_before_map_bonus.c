@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info_before_map.c                                  :+:      :+:    :+:   */
+/*   info_before_map_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:09:34 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 11:59:19 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/06 14:24:28 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 int	check_other_character(char *s1)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	if (!s1)
 		return (0);
 	while (s1[i] && s1[i] != '\n' && (s1[i] == ' ' || (s1[i] >= 7
 				&& s1[i] <= 13)))
 		i++;
-	if ((s1[i] >= 33 && s1[i] <= 47) || (s1[i] >= 50 && s1[i] <= 127))
+	if ((s1[i] >= 33 && s1[i] <= 47) || (s1[i] >= 50))
 		return (1);
 	return (0);
 }
@@ -102,7 +100,11 @@ int	get_info(t_data *data, int fd)
 	if (error == 1)
 		return (1);
 	fd2 = open(data->map->map_file, O_RDONLY);
-	get_map(data->map, fd2);
+	if (get_map(data->map, fd2) == -1)
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }
