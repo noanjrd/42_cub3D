@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:17:35 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 19:25:17 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/08 17:18:26 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_free_mlx(t_mlx *mlx)
 
 void	ft_free_texture(t_mlx *mlx, t_texture *tex)
 {
-	if (tex->img)
+	if (tex->img != NULL)
 		mlx_destroy_image(mlx->mlx, tex->img);
 	free(tex);
 	return ;

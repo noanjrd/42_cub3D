@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 12:35:40 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 19:26:22 by njard            ###   ########.fr       */
+/*   Created: 2025/09/08 17:05:03 by njard             #+#    #+#             */
+/*   Updated: 2025/09/08 17:19:45 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 void	set_mlx_texture(t_data *data, t_texture *tex, char *texture_file)
 {
-	tex->img = mlx_xpm_file_to_image(data->mlx->mlx,
-			texture_file,
-			&tex->width,
+	tex->img = mlx_xpm_file_to_image(data->mlx->mlx, texture_file, &tex->width,
 			&tex->height);
 	if (!tex->img)
 	{
 		ft_print_error("Cannot load texture.");
 		ft_destroy_window(data);
 	}
-	tex->addr = mlx_get_data_addr(tex->img,
-			&tex->bits_per_pixel,
-			&tex->line_length,
-			&tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bits_per_pixel,
+			&tex->line_length, &tex->endian);
 	if (!tex->addr)
 	{
 		ft_print_error("Cannot load texture.");
@@ -47,6 +43,10 @@ void	ft_create_texture(t_data *data)
 	so = malloc(sizeof(t_texture));
 	if (!no || !we || !ea || !so)
 		return ;
+	no->img = NULL;
+	we->img = NULL;
+	ea->img = NULL;
+	so->img = NULL;
 	data->ea = ea;
 	data->so = so;
 	data->no = no;
@@ -62,21 +62,17 @@ void	init_mlx(t_data *data)
 	data->mlx->mlx = mlx_init();
 	if (!data->mlx->mlx)
 		return ;
-	data->mlx->win = mlx_new_window(data->mlx->mlx,
-			WINDOW_WIDTH,
-			WINDOW_HEIGHT,
+	data->mlx->win = mlx_new_window(data->mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3D");
-	data->mlx->img = mlx_new_image(data->mlx->mlx,
-			WINDOW_WIDTH,
-			WINDOW_HEIGHT);
+	data->mlx->img = mlx_new_image(data->mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img,
-			&data->mlx->bits_per_pixel,
-			&data->mlx->line_length,
+			&data->mlx->bits_per_pixel, &data->mlx->line_length,
 			&data->mlx->endian);
 	ft_create_texture(data);
+	mlx_hook(data->mlx->win, 6, PointerMotionMask, mouse_move, data);
 	mlx_hook(data->mlx->win, 17, 0, ft_destroy_window, data);
-	mlx_key_hook(data->mlx->win, key_action, data);
+	mlx_hook(data->mlx->win, 2, 1L << 0, on_key_press, data);
+	mlx_hook(data->mlx->win, 3, 1L << 1, on_key_release, data);
 	mlx_loop_hook(data->mlx->mlx, raycasting, data);
 	mlx_loop(data->mlx->mlx);
-	return ;
 }

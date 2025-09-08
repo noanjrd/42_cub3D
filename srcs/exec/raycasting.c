@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 14:16:57 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/08 17:00:19 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	raycasting(t_data *data)
 	int	x;
 
 	x = 0;
+	handle_player_actions(data);
 	while (x < WINDOW_WIDTH)
 	{
 		calcul_delta(data->game, data->player, x);

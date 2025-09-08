@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 19:22:27 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/08 17:08:10 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define PARAM_WRITTEN "One of the parameters is not correctly written."
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
@@ -28,6 +29,14 @@
 #define WINDOW_HEIGHT 480
 #define RIGHT 1
 #define LEFT 0
+#define ESCAPE 65307
+#define ESCAPE 65307
+#define W 119
+#define A 97
+#define S 115
+#define D 100
+#define ROTATE_L 65361
+#define ROTATE_R 65363
 
 typedef struct t_color
 {
@@ -116,6 +125,13 @@ typedef struct t_data
 	char		*ea_texture;
 	char		*f_color;
 	char		*c_color;
+	bool		move_up;
+	bool		move_down;
+	bool		move_left;
+	bool		move_right;
+	bool		rotate_left;
+	bool		rotate_right;
+	bool		quit;
 	t_texture	*no;
 	t_texture	*so;
 	t_texture	*we;
@@ -181,3 +197,13 @@ void			calcul_draw_end_start(t_data *data, t_mlx *mlx, t_game *game,
 					int x);
 void			calcul_texture(t_data *data, t_game *game, t_player *player);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void			handle_player_actions(t_data *data);
+int				on_key_press(int keycode, t_data *data);
+int				on_key_release(int keycode, t_data *data);
+void			handle_player_actions(t_data *data);
+void			move_player_forward(t_data *data);
+void			move_player_backward(t_data *data);
+void			move_player_left(t_data *data);
+void			move_player_right(t_data *data);
+void			change_direction(t_data *data, double degree);
+void			change_direction(t_data *data, double degree);

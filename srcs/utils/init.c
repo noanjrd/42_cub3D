@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 13:25:42 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 12:01:44 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/08 16:04:30 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,13 @@ void	ft_init_data_rest(t_data *data, char **argv)
 
 	player = malloc(sizeof(t_player));
 	game = malloc(sizeof(t_game));
+	data->move_up = 0;
+	data->move_down = 0;
+	data->move_right = 0;
+	data->move_left = 0;
+	data->rotate_right = 0;
+	data->rotate_left = 0;
+	data->quit = 0;
 	data->game = game;
 	data->player = player;
 	ft_init_mlx(data->mlx);

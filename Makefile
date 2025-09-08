@@ -23,6 +23,7 @@ SRCS = srcs/main.c\
 	srcs/parsing/colors.c\
 	srcs/exec/exec.c\
 	srcs/exec/keyboard.c\
+	srcs/exec/movements.c\
 	srcs/exec/mouse.c\
 	srcs/exec/raycasting_calculations.c\
 	srcs/exec/raycasting.c
@@ -48,6 +49,7 @@ SRCS_BONUS = bonus/srcs/main_bonus.c \
 	bonus/srcs/exec/exec_bonus.c \
 	bonus/srcs/exec/keyboard_bonus.c \
 	bonus/srcs/exec/mouse_bonus.c \
+	bonus/srcs/exec/movements_bonus.c\
 	bonus/srcs/exec/raycasting_calculations_bonus.c \
 	bonus/srcs/exec/raycasting_bonus.c
 
