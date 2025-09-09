@@ -8,6 +8,7 @@ SRCS = srcs/main.c\
 	srcs/utils/player_utils.c\
 	srcs/utils/utils2.c\
 	srcs/utils/libft.c\
+	srcs/utils/ft_split.c\
 	srcs/utils/free.c\
 	srcs/utils/init.c\
 	srcs/parsing/parsing.c\
@@ -24,14 +25,16 @@ SRCS = srcs/main.c\
 	srcs/exec/exec.c\
 	srcs/exec/manage_window.c\
 	srcs/exec/ray_casting.c\
-	srcs/exec/ray_casting2.c
+	srcs/exec/ray_casting2.c\
+	srcs/exec/ft_free.c\
+	srcs/exec/draw_columns.c
 
 OBJS = ${SRCS:.c=.o}
 
 all: install $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -o $(NAME) 
+	$(CC) $(FLAGS) $(OBJS)  -Lmlx_linux -lmlx -lXext -lX11 -lm -g -o $(NAME) 
 	make clean
 
 %.o: %.c

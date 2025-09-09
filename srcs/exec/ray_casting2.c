@@ -10,19 +10,51 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
     dst = data->mlx->addr + (y * data->mlx->line_length + x * (data->mlx->bits_per_pixel / 8));
     *(unsigned int*)dst = color;
 }
-void draw_column(t_data *data, int x, int draw_start, int draw_end)
+int get_texture_pixel(t_data *data, void *texture_img, int tex_x, int tex_y)
 {
-    int y;
+    char *texture_data;
+    int bits_per_pixel, line_length, endian;
+    char *dst;
     
-    y = draw_start;    
-    if (draw_start < 0)
-        draw_start = 0;
-    if (draw_end >= WINDOW_HEIGHT)
-        draw_end = WINDOW_HEIGHT - 1;
-    
-    while (y <= draw_end)
+    texture_data = mlx_get_data_addr(texture_img, &bits_per_pixel, &line_length, &endian);
+    dst = texture_data + (tex_y * line_length + tex_x * (bits_per_pixel / 8));
+    return (*(int*)dst);
+}
+
+void wall_ver_or_hor(t_data *data)
+{
+    if (data->player->side == 0) // Mur vertical
     {
-        my_mlx_pixel_put(data, x, y, 0xFF0000); // Rouge pour le mur
-        y++;
+        if (data->player->ray_dir_x > 0)
+            data->wall_texture = data->texture->wall_E; // Mur Est
+        else
+            data->wall_texture = data->texture->wall_W; // Mur Ouest
     }
+    else // Mur horizontal
+    {
+        if (data->player->ray_dir_y > 0)
+            data->wall_texture = data->texture->wall_S; // Mur Sud
+        else
+            data->wall_texture = data->texture->wall_N; // Mur Nord
+    }
+}
+void init_wall_x(double *wall_x, t_data *data)
+{
+    if (data->player->side == 0)
+        *wall_x = data->player->y + data->player->perp_wall_dist * data->player->ray_dir_y;
+    else
+        *wall_x = data->player->x + data->player->perp_wall_dist * data->player->ray_dir_x;
+    *wall_x -= floor(*wall_x);
+    data->texture->tex_x = (int)(*wall_x * 64.0);
+}
+
+void init_draw_start_end(int *draw_start, int *draw_end, int *wall_height,
+    double *step)
+{
+    if (*draw_start < 0)
+        *draw_start = 0;
+    if (*draw_end >= WINDOW_HEIGHT)
+        *draw_end = WINDOW_HEIGHT - 1;
+    *wall_height = *draw_end - *draw_start;
+    *step = 64.0 / *wall_height;
 }

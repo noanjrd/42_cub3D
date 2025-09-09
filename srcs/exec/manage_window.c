@@ -1,18 +1,15 @@
 #include "../../include/cub3D.h"
 
-void free_map(t_map *map)
+void init_texture(t_data *data)
 {
-    int i;
+    int width;
+    int height;
 
-    i = 0;
-    while(map->map[i])
-    {
-        free(map->map[i]);
-        i++;
-    }
-    free(map->map);
+    data->texture->wall_N = mlx_xpm_file_to_image(data->mlx->mlx, data->NO_texture, &width, &height);
+    data->texture->wall_S = mlx_xpm_file_to_image(data->mlx->mlx, data->SO_texture, &width, &height);
+    data->texture->wall_E = mlx_xpm_file_to_image(data->mlx->mlx, data->EA_texture, &width, &height);
+    data->texture->wall_W = mlx_xpm_file_to_image(data->mlx->mlx, data->WE_texture, &width, &height);
 }
-
 int calcul_display(t_data *data)
 {
     int x = 0;
@@ -20,7 +17,7 @@ int calcul_display(t_data *data)
     int draw_start;
     int draw_end;
     
-    // calcul_player(data);
+    clear_image(data);
     while (x < WINDOW_WIDTH)
     {
         data->player->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
@@ -37,26 +34,6 @@ int calcul_display(t_data *data)
     return (0);
 }
 
-void destroy_window(t_data *data)
-{
-    mlx_destroy_image(data->mlx->mlx, data->mlx->img);
-    mlx_destroy_window(data->mlx->mlx, data->mlx->win);
-    mlx_destroy_display(data->mlx->mlx);
-    free_map(data->map);
-    free(data->map);
-    free(data->mlx);
-    free(data->ceiling);
-    free(data->floor);
-    free(data->SO_texture);
-    free(data->F_color);
-    free(data->C_color);
-    free(data->NO_texture);
-    free(data->WE_texture);
-    free(data->EA_texture);
-    free(data);
-    free(data->player);
-    exit(0);
-}
 int close_window(t_data *data)
 {
     destroy_window(data);
@@ -68,27 +45,96 @@ int manage_window(int keycode, t_data *data)
         destroy_window(data);
 }
 
-int key_action(int keycode, t_data *data)
+void arrow_left(t_data *data)
 {
-    printf("x = %f et y = %f", data->player->x, data->player->y);
+    double old_plane_x;
+    double angle;
+    double cos_a;
+    double sin_a;
+    double old_dir_x;
+    angle = -0.1;
+    cos_a = cos(angle);
+    sin_a = sin(angle);
+    old_dir_x = data->player->dir_x;
+    data->player->dir_x = data->player->dir_x * cos_a - data->player->dir_y * sin_a;
+    data->player->dir_y = old_dir_x * sin_a + data->player->dir_y * cos_a;
+    old_plane_x = data->player->plane_x;
+    data->player->plane_x = data->player->plane_x * cos_a - data->player->plane_y * sin_a;
+    data->player->plane_y = old_plane_x * sin_a + data->player->plane_y * cos_a;
+}
+void arrow_right(t_data *data)
+{
+    double old_plane_x;
+    double angle;
+    double cos_a;
+    double sin_a;
+    double old_dir_x;
+    angle = 0.1;
+    cos_a = cos(angle);
+    sin_a = sin(angle);
+    old_dir_x = data->player->dir_x;
+    data->player->dir_x = data->player->dir_x * cos_a - data->player->dir_y * sin_a;
+    data->player->dir_y = old_dir_x * sin_a + data->player->dir_y * cos_a;
+    old_plane_x = data->player->plane_x;
+    data->player->plane_x = data->player->plane_x * cos_a - data->player->plane_y * sin_a;
+    data->player->plane_y = old_plane_x * sin_a + data->player->plane_y * cos_a;
+
+}
+
+int touch_wall(t_data *data, int keycode)
+{
+    int y;
+    int x;
+
     if (keycode == 119)
     {
-        data->player->y -= 0.2;
-        printf("W\n");
+        y = floor(data->player->y + (0.2 * data->player->dir_y));
+        x = floor(data->player->x + (0.2 * data->player->dir_x));
     }
-    if (keycode == 115)
+    else if (keycode == 115)
     {
-        data->player->y += 0.2;
-        printf("S\n");        
+        y = floor(data->player->y - (0.2 * data->player->dir_y));
+        x = floor(data->player->x - (0.2 * data->player->dir_x));
     }
-    if (keycode == 97)
+    else if (keycode == 97)
     {
-        data->player->x -= 0.2;
-        printf("A\n");        
+        y = floor(data->player->y - (0.2 * data->player->plane_y));
+        x = floor(data->player->x - (0.2 * data->player->plane_x));
     }
-    if (keycode == 100)
+    else if (keycode == 100)
     {
-        data->player->x += 0.2;
-        printf("D\n");        
+        y = floor(data->player->y + (0.2 * data->player->plane_y));
+        x = floor(data->player->x + (0.2 * data->player->plane_x));
     }
+    if (data->map->map[y][x] == '1')
+        return (1);
+    return (0);
+}
+
+int key_action(int keycode, t_data *data)
+{
+    if (keycode == 119 && touch_wall(data, keycode) != 1)
+    {
+        data->player->y += 0.2 * data->player->dir_y;
+        data->player->x += 0.2 * data->player->dir_x;
+    }
+    if (keycode == 115 && touch_wall(data, keycode) != 1)
+    {
+        data->player->y -= 0.2 * data->player->dir_y;
+        data->player->x -= 0.2 * data->player->dir_x;
+    }
+    if (keycode == 97 && touch_wall(data, keycode) != 1)
+    {
+        data->player->y -= 0.2 * data->player->plane_y;
+        data->player->x -= 0.2 * data->player->plane_x;
+    }
+    if (keycode == 100 && touch_wall(data, keycode) != 1)
+    {
+        data->player->y += 0.2 * data->player->plane_y;
+        data->player->x += 0.2 * data->player->plane_x;
+    }
+    if (keycode == 65361) //fleche gauche
+        arrow_left(data);
+    if (keycode == 65363) //fleche droite
+        arrow_right(data);
 }

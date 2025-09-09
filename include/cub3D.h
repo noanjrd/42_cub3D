@@ -58,6 +58,21 @@ typedef struct t_map
 	char *l;
 } t_map;
 
+typedef struct t_texture
+{
+	double tex_pos;
+	int tex_x;
+	int tex_y;
+	int col_ceil;
+	int col_floor;
+	int color;
+	void *wall_N;
+	void *wall_S;
+	void *wall_E;
+	void *wall_W;
+	void *floor;
+	void *ceiling;
+} t_texture;
 typedef struct t_player
 {
 	double x; //position x sur la carte (col)
@@ -74,12 +89,14 @@ typedef struct t_player
 	int hit;
 	int map_x;
 	int map_y;
+	int side;
 	char spawn;
 	double perp_wall_dist;
 } t_player;
 
 typedef struct t_data
 {
+	void *wall_texture;
 	char *NO_texture;
 	char *SO_texture;
 	char *WE_texture;
@@ -91,6 +108,7 @@ typedef struct t_data
 	t_color *floor;
 	t_mlx *mlx;
 	t_player *player;
+	t_texture *texture;
 } t_data;
 
 
@@ -139,3 +157,16 @@ double cast_ray (t_data *data, double ray_dir_x, double ray_dir_y);
 void draw_column(t_data *data,int x, int draw_start, int draw_end);
 int key_action(int keycode, t_data *data);
 void calcul_player(t_data *data);
+void clear_image(t_data *data);
+void destroy_window(t_data *data);
+void free_map(t_map *map);
+void init_texture(t_data *data);
+char    **ft_split(char const *s, char c);
+void free_split(char **tab);
+void init_draw_start_end(int *draw_start, int *draw_end, int *wall_height,
+    double *step);
+void init_wall_x(double *wall_x, t_data *data);
+void wall_ver_or_hor(t_data *data);
+int get_texture_pixel(t_data *data, void *texture_img, int tex_x, int tex_y);
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void color_ceil_floor(t_data *data, int n);

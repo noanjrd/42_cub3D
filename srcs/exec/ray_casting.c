@@ -103,6 +103,7 @@ double cast_ray (t_data *data, double ray_dir_x, double ray_dir_y)
         if (data->map->map[data->player->map_y][data->player->map_x] == '1')
             data->player->hit = 1;
     }
+    data->player->side = side;
     calcul_perp_wall(data, side, step_x, step_y);
     return (data->player->perp_wall_dist);
 }
