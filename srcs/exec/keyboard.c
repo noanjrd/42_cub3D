@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:05:58 by njard             #+#    #+#             */
-/*   Updated: 2025/09/08 17:01:45 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/09 22:39:34 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,10 @@ int	mouse_move(int x, int y, t_data *data)
 
 int	check_wall(char **map, int y, int x)
 {
-	if (map[y][x] != '1')
+	if (map[y][x] == '1')
 	{
-		return (0);
+		return (1);
 	}
-	if (map[y + 1][x] && map[y + 1][x] == 'X')
-		return (1);
-	if (map[y - 1][x] && map[y - 1][x] == 'X')
-		return (1);
-	if (map[y][x + 1] && map[y][x + 1] == 'X')
-		return (1);
-	if (map[y][x - 1] && map[y][x - 1] == 'X')
-		return (1);
 	return (0);
 }
 

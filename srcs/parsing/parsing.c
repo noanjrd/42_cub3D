@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 18:43:51 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/09 22:53:04 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	parsing(t_data *data)
 	if (get_info(data, fd) == 1)
 		return (close(fd), ft_print_error(PARAM_WRITTEN), -1);
 	else if (check_map_closed(data->map) == 1)
-		return (close(fd), ft_print_error("The map is not closed"), -1);
+		return (close(fd), ft_print_error("The map is not closed."), -1);
 	close(fd);
 	if (color_to_int(data->f_color, data->floor, 0, 0) == -1)
 		return (ft_print_error(WRONG_COLOR_FORMAT), -1);
@@ -113,6 +113,6 @@ int	parsing(t_data *data)
 	if (check_good_format_color(data) == -1)
 		return (ft_print_error(NOT_A_BYTE), -1);
 	if (open_textures(data) == -1)
-		return (ft_print_error("Can't open one of the textures."), -1);
+		return (ft_print_error("Cannot open one of the textures."), -1);
 	return (0);
 }

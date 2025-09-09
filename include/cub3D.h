@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/08 17:08:10 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/09 22:52:40 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define PARAM_WRITTEN "One of the parameters is not correctly written."
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
 #define NOT_RGB "The color of the ceiling doesn't have a rgb format."
-#define NOT_A_BYTE "each number of the rgb color must be between 0 and 255."
+#define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 #define RIGHT 1
