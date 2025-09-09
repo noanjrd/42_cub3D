@@ -59,15 +59,23 @@ make
   <li><kbd>ESC</kbd> → Exit the game</li>
 </ul>
 
+<h2>📚 What we learned</h2>
+<ul>
+  <li>How a basic 3D engine works using <strong>raycasting</strong> and the math behind it</li>
+  <li>Vector math for movement, direction, and collision detection</li>
+  <li>Coordinate systems and mapping 2D grid maps to 3D space</li>
+  <li>Working with the <strong>MiniLibX</strong> library for graphics</li>
+  <li>Teamwork, Git collaboration, and project organization</li>
+</ul>
+
 <h2>📸 Screenshots</h2>
 <p align="center">
-  <img src="screenshots/gameplay.png" alt="Gameplay screenshot" width="600"/>
+  <img src="imgs/visual.gif" alt="Gameplay screenshot" width="600"/>
 </p>
 
 <h2>👨‍💻 Authors</h2>
 <ul>
-  <li><a>JARD Noan</a></li>
-  <li><a href="https://github.com/mpinguet">Macéo Pinguet</a></li>
+  <a>This project was made by <strong>JARD Noan</strong> and </a><a href="https://github.com/mpinguet"><strong>PINGUET Macéo</strong>.</a>
 </ul>
 
 <hr />
