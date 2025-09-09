@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🕹️ cub3D</h1>
+  <h1>🕹️ Cub3D</h1>
   <p>
     <em>A 3D game inspired by Wolfenstein 3D, built with the <strong>MiniLibX</strong> library.</em>
   </p>
@@ -9,7 +9,7 @@
 
 <h2>📖 About the project</h2>
 <p>
-  <strong>cub3D</strong> is a project from the <a href="https://42.fr">42 School</a> curriculum.  
+  <strong>Cub3D</strong> is a project from the <a href="https://42.fr">42 School</a> curriculum.  
   The goal is to create a simple 3D game engine using raycasting, similar to early FPS games.  
   It provides a first-person view inside a maze, allowing the player to move around and interact with the world.
 </p>
