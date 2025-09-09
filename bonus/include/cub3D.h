@@ -6,14 +6,14 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/08 17:08:10 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/08 17:36:44 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../mlx_linux/mlx.h"
-#include "../mlx_linux/mlx_int.h"
+#include "../../mlx_linux/mlx.h"
+#include "../../mlx_linux/mlx_int.h"
 #include <fcntl.h>
 #include <math.h>
 #include <stdio.h>

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 19:29:21 by njard            ###   ########.fr       */
+/*   Created: 2025/07/13 12:32:59 by njard             #+#    #+#             */
+/*   Updated: 2025/07/16 14:59:26 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-int	main(int argc, char **argv)
+int	ft_strlen(char *chaine)
 {
-	t_data	*data;
+	int	i;
 
-	if (argc == 1)
-		return (ft_print_error("Miss an argument"), 0);
-	if (argc > 2)
-		return (ft_print_error("Too many arguments"), 0);
-	data = malloc(sizeof(t_data));
-	ft_init_data(data, argv);
-	if (parsing(data) == 0)
-	{
-		ft_init_player(data->player, data->map->map);
-		init_mlx(data);
-	}
-	ft_free_data(data);
-	return (0);
+	i = 0;
+	if (chaine == NULL || !chaine)
+		return (0);
+	while (chaine[i] != '\0')
+		i++;
+	return (i);
 }

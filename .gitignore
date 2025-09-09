@@ -3,3 +3,5 @@ cub3D
 a.out
 .vscode
 vscode
+*.o
+bash.sh
