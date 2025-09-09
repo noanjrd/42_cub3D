@@ -6,38 +6,43 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/09/06 14:44:27 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/09 18:47:29 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	color_to_int(char *color_tab, t_color *color, int j, int i)
+int	parse_component(char *color_tab, int *j, long *out)
 {
 	char	*tab;
+	int		i;
 
+	i = 0;
 	tab = malloc(150);
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0 || i > 3)
+	if (!tab)
+		return (-1);
+	while (color_tab[*j] && color_tab[*j] != ',')
+		tab[i++] = color_tab[(*j)++];
+	tab[i] = '\0';
+	if (i < 1 || ft_atoi(tab) == -1)
 		return (free(tab), -1);
-	j++;
-	tab[i] = 0;
-	color->r = ft_atoi(tab);
-	i = 0;
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0 || i > 3)
-		return (free(tab), -1);
-	j++;
-	color->g = ft_atoi(tab);
-	i = 0;
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	if (i > 3)
-		return (free(tab), -1);
-	color->b = ft_atoi(tab);
-	return (free(tab), 0);
+	*out = ft_atoi(tab);
+	free(tab);
+	if (color_tab[*j] == ',')
+		(*j)++;
+	return (0);
+}
+
+int	color_to_int(char *color_tab, t_color *color, int j, int i)
+{
+	(void)i;
+	if (parse_component(color_tab, &j, &color->r) == -1)
+		return (-1);
+	if (parse_component(color_tab, &j, &color->g) == -1)
+		return (-1);
+	if (parse_component(color_tab, &j, &color->b) == -1)
+		return (-1);
+	return (0);
 }
 
 int	check_good_format_color(t_data *data)

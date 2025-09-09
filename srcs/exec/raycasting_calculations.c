@@ -6,7 +6,7 @@
 /*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:17:36 by njard             #+#    #+#             */
-/*   Updated: 2025/09/04 13:47:59 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/09 18:45:43 by njard            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void	calcul_texture(t_data *data, t_game *game, t_player *player)
 	wallx -= floor(wallx);
 	game->texx = (int)(wallx * (double)data->no->width);
 	if (game->side == 1 && game->raydiry > 0)
+		game->texx = data->no->width - (game->texx) - 1;
+	if (game->side == 0 && game->raydirx < 0)
 		game->texx = data->no->width - (game->texx) - 1;
 	game->step = (double)data->no->height / (double)game->lineheight;
 	game->texpos = (game->drawstart - (WINDOW_HEIGHT / 2) + (game->lineheight
