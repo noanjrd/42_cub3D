@@ -66,7 +66,7 @@ make
 
 <h2>👨‍💻 Authors</h2>
 <ul>
-  <li><a href="https://github.com/yourusername">JARD Noan</a></li>
+  <li><a>JARD Noan</a></li>
   <li><a href="https://github.com/mpinguet">Macéo Pinguet</a></li>
 </ul>
 
