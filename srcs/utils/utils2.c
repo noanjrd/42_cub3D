@@ -34,5 +34,9 @@ long	ft_atoi(const char *nptr)
 		nb = nb * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (nb * signe);
+	if (nb < 0 || nb > 255)
+		return (-1);
+	if (nptr[i] == '\0' || nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		return (nb * signe);
+	return (-1);
 }

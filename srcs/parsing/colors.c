@@ -12,32 +12,39 @@
 
 #include "../../include/cub3D.h"
 
-int	color_to_int(char *color_tab, t_color *color, int j)
+int nb_comma(char *str)
 {
 	int i;
-	char *tab;
+	int j;
 
 	i = 0;
-	tab = malloc(100);
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0)
-		return -1;
-	j++;
-	tab[i] = 0;
-	color->r = ft_atoi(tab);
-	i = 0;
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	if (color_tab[j] == 0)
-		return -1;
-	j++;
-	color->g = ft_atoi(tab);
-	i = 0;
-	while (color_tab[j] && color_tab[j] != ',')
-		tab[i++] = color_tab[j++];
-	color->b = ft_atoi(tab);
-	return (free(tab), 0);
+	j = 0;
+	while(str[i])
+	{
+		if (str[i] == ',')
+			j++;
+		i++;
+	}
+	return (j);
+}
+
+int	color_to_int(char *color_tab, t_color *color)
+{
+	char	**split;
+
+	if (nb_comma(color_tab) != 2)
+		return (-1);
+	split = ft_split(color_tab, ',');
+	// printf("split = %s\n", split[0]);
+	if (!split || !split[0] || !split[1] || !split[2])
+		return (-1);
+	color->r = ft_atoi(split[0]);
+	color->g = ft_atoi(split[1]);
+	color->b = ft_atoi(split[2]);
+	if (color->r < 0 || color->g < 0 || color->b < 0 )
+		return (-1);
+	free_split(split);
+	return (0);
 }
 
 int check_good_format_color(t_data *data)

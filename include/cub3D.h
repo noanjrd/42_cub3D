@@ -20,7 +20,6 @@
 #include <fcntl.h>
 #include <math.h>
 
-#define PARAM_WRITTEN "One of the parameters is not correctly written"
 #define WRONG_COLOR_FORMAT "The color of the floor doesn't have a rgb format."
 #define NOT_RGB "The color of the ceiling doesn't have a rgb format."
 #define NOT_A_BYTE "Each number of the rgb color must be between 0 and 255."
@@ -119,7 +118,7 @@ char	*ft_free_buffer(char *buffer, char *chaine, int put_NULL);
 char	*ft_strjoin_gnl(char *buffer, char *temp);
 int parsing(t_data *data);
 char	*get_next_line(int fd);
-void	get_map(t_map *map, int fd);
+int	get_map(t_map *map, int fd);
 int skip_old_line(char *line);
 int ft_check_map_error(t_map *map, int fd);
 int check_map_closed(t_map *map);
@@ -127,7 +126,7 @@ int get_info(t_data *data, int fd);
 char *ft_copy_info(char *line);
 int check_first_param(t_data *data);
 int check_good_format_color(t_data *data);
-int	color_to_int(char *color_tab, t_color *color, int j);
+int	color_to_int(char *color_tab, t_color *color);
 int check_string_beggining(char *s1, char *s2, int texture);
 int copy_line_map(t_map *map, char *line, int z, int i);
 void fill_line(t_map *map, int z, int start, int end);

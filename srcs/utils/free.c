@@ -52,6 +52,8 @@ void ft_free_data(t_data *data)
 	free(data->EA_texture);
 	free(data->floor);
 	free(data->ceiling);
+	free(data->player);
+	free(data->texture);
 	ft_free_map(data->map);
 	ft_free_mlx(data->mlx);
 	free(data);

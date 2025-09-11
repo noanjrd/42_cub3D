@@ -27,8 +27,6 @@ int main(int argc, char **argv)
 		init_mlx(data);
 		init_player(data);
 		init_texture(data);
-		color_ceil_floor(data, 0);
-		color_ceil_floor(data, 1);
 		mlx_hook(data->mlx->win, 17, 0, close_window, data);
 		mlx_hook(data->mlx->win , 2, 1L << 0, manage_window, data);
 		mlx_key_hook(data->mlx->win, key_action, data);

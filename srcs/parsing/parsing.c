@@ -104,13 +104,13 @@ int parsing(t_data *data)
 	if (fd < 0)
 		return (perror("Error"), -1);
 	if (get_info(data, fd) == 1)
-		return (close(fd), ft_print_error(PARAM_WRITTEN), -1);
+		return (close(fd), -1);
 	else if (check_map_closed(data->map) == 1)
 		return (close(fd), ft_print_error("The map is not closed"), -1);
 	close(fd);
-	if (color_to_int(data->F_color, data->floor,0) == -1)
+	if (color_to_int(data->F_color, data->floor) == -1)
 		return (ft_print_error(WRONG_COLOR_FORMAT), -1);
-	if (color_to_int(data->C_color, data->ceiling,0) == -1)
+	if (color_to_int(data->C_color, data->ceiling) == -1)
 		return (ft_print_error(NOT_RGB), -1);
 	if (check_good_format_color(data) == -1)
 		return (ft_print_error(NOT_A_BYTE), -1);

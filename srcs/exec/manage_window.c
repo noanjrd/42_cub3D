@@ -9,6 +9,8 @@ void init_texture(t_data *data)
     data->texture->wall_S = mlx_xpm_file_to_image(data->mlx->mlx, data->SO_texture, &width, &height);
     data->texture->wall_E = mlx_xpm_file_to_image(data->mlx->mlx, data->EA_texture, &width, &height);
     data->texture->wall_W = mlx_xpm_file_to_image(data->mlx->mlx, data->WE_texture, &width, &height);
+    color_ceil_floor(data, 0);
+	color_ceil_floor(data, 1);
 }
 int calcul_display(t_data *data)
 {
