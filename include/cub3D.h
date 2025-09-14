@@ -6,7 +6,7 @@
 /*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/08/19 17:17:03 by mpinguet         ###   ########.fr       */
+/*   Updated: 2025/09/14 19:42:37 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,3 +169,4 @@ void wall_ver_or_hor(t_data *data);
 int get_texture_pixel(t_data *data, void *texture_img, int tex_x, int tex_y);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void color_ceil_floor(t_data *data, int n);
+int texture_valid(char *str);

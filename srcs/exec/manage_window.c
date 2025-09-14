@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_window.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/14 19:51:31 by mpinguet          #+#    #+#             */
+/*   Updated: 2025/09/14 19:51:31 by mpinguet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D.h"
 
 void init_texture(t_data *data)
@@ -39,12 +51,14 @@ int calcul_display(t_data *data)
 int close_window(t_data *data)
 {
     destroy_window(data);
+return (0);
 }
 
 int manage_window(int keycode, t_data *data)
 {
     if (keycode == 65307)
         destroy_window(data);
+	return (0);
 }
 
 void arrow_left(t_data *data)
@@ -54,6 +68,7 @@ void arrow_left(t_data *data)
     double cos_a;
     double sin_a;
     double old_dir_x;
+
     angle = -0.1;
     cos_a = cos(angle);
     sin_a = sin(angle);
@@ -71,6 +86,7 @@ void arrow_right(t_data *data)
     double cos_a;
     double sin_a;
     double old_dir_x;
+
     angle = 0.1;
     cos_a = cos(angle);
     sin_a = sin(angle);
@@ -139,4 +155,5 @@ int key_action(int keycode, t_data *data)
         arrow_left(data);
     if (keycode == 65363) //fleche droite
         arrow_right(data);
+	return (0);
 }

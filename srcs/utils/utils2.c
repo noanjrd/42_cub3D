@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 13:57:31 by njard             #+#    #+#             */
-/*   Updated: 2025/07/16 14:39:39 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/14 19:01:48 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ long	ft_atoi(const char *nptr)
 	if (nptr[i] == '\0' || nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		return (nb * signe);
 	return (-1);
+}
+
+int texture_valid(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] && str[i] >= 9 && str[i] <= 13)
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
 }
