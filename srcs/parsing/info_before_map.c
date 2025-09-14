@@ -55,7 +55,7 @@ int check_info_next(t_data *data, char *line)
 		data->C_color = ft_copy_info(line);
 	}
 	else if (check_other_character(line) == 1)
-		return (ft_print_error("Wrong texture name."), -1);
+		return (ft_print_error("Wrong texture name or character of map."), -1);
 	return 0;
 }
 
@@ -90,19 +90,14 @@ int get_info(t_data *data, int fd)
 	char *line;
 	int error;
 	int fd2;
-	int i;
 
 	error = 0;
 	line = get_next_line(fd);
-	i = 0;
 	while (line)
 	{
 		if (line && check_info(data, line) == -1 && error == 0)
 			error = 1;
 		free(line);
-		i++;
-		if (i == 6)
-			break;
 		line = get_next_line(fd);
 	}
 	if (error == 1)
