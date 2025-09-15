@@ -26,8 +26,10 @@ SRCS = srcs/main.c\
 	srcs/exec/manage_window.c\
 	srcs/exec/ray_casting.c\
 	srcs/exec/ray_casting2.c\
+	srcs/exec/ray_casting3.c\
 	srcs/exec/ft_free.c\
-	srcs/exec/draw_columns.c
+	srcs/exec/draw_columns.c\
+	srcs/exec/manage_key.c
 
 OBJS = ${SRCS:.c=.o}
 

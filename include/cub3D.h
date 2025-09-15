@@ -97,6 +97,12 @@ typedef struct t_player
 
 typedef struct t_data
 {
+	int move_up;
+	int move_down;
+	int move_left;
+	int move_right;
+	int rotate_left;
+	int rotate_right;
 	void *wall_texture;
 	char *NO_texture;
 	char *SO_texture;
@@ -156,7 +162,7 @@ void init_dir(t_data *data);
 void 	init_plane(t_data *data);
 double cast_ray (t_data *data, double ray_dir_x, double ray_dir_y);
 void draw_column(t_data *data,int x, int draw_start, int draw_end);
-int key_action(int keycode, t_data *data);
+void key_action(t_data *data);
 void calcul_player(t_data *data);
 void clear_image(t_data *data);
 void destroy_window(t_data *data);
@@ -172,3 +178,12 @@ int get_texture_pixel(t_data *data, void *texture_img, int tex_x, int tex_y);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void color_ceil_floor(t_data *data, int n);
 int texture_valid(char *str);
+int on_key_press(int keycode, t_data *data);
+int on_key_release(int keycode, t_data *data);
+void init_delta(t_data *data);
+void calcul_distance_x(t_data *data, double *side_dist_x, int *step_x);
+void calcul_distance_y(t_data *data, double *side_dist_y, int *step_y);
+int touch_wall(t_data *data);
+void arrow_left(t_data *data);
+void arrow_right(t_data *data);
+

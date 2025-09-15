@@ -30,6 +30,7 @@ int calcul_display(t_data *data)
     int draw_end;
     
     clear_image(data);
+    key_action(data);
     while (x < WINDOW_WIDTH)
     {
         data->player->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
@@ -44,19 +45,6 @@ int calcul_display(t_data *data)
     }
     mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, data->mlx->img, 0, 0);
     return (0);
-}
-
-int close_window(t_data *data)
-{
-    destroy_window(data);
-return (0);
-}
-
-int manage_window(int keycode, t_data *data)
-{
-    if (keycode == 65307)
-        destroy_window(data);
-	return (0);
 }
 
 void arrow_left(t_data *data)
@@ -97,27 +85,27 @@ void arrow_right(t_data *data)
 
 }
 
-int touch_wall(t_data *data, int keycode)
+int touch_wall(t_data *data)
 {
     int y;
     int x;
 
-    if (keycode == 119)
+    if (data->move_up == 1)
     {
         y = floor(data->player->y + (0.2 * data->player->dir_y));
         x = floor(data->player->x + (0.2 * data->player->dir_x));
     }
-    else if (keycode == 115)
+    else if (data->move_down == 1)
     {
         y = floor(data->player->y - (0.2 * data->player->dir_y));
         x = floor(data->player->x - (0.2 * data->player->dir_x));
     }
-    else if (keycode == 97)
+    else if (data->move_left == 1)
     {
         y = floor(data->player->y - (0.2 * data->player->plane_y));
         x = floor(data->player->x - (0.2 * data->player->plane_x));
     }
-    else if (keycode == 100)
+    else if (data->move_right == 1)
     {
         y = floor(data->player->y + (0.2 * data->player->plane_y));
         x = floor(data->player->x + (0.2 * data->player->plane_x));
@@ -125,33 +113,4 @@ int touch_wall(t_data *data, int keycode)
     if (data->map->map[y][x] == '1')
         return (1);
     return (0);
-}
-
-int key_action(int keycode, t_data *data)
-{
-    if (keycode == 119 && touch_wall(data, keycode) != 1)
-    {
-        data->player->y += 0.2 * data->player->dir_y;
-        data->player->x += 0.2 * data->player->dir_x;
-    }
-    if (keycode == 115 && touch_wall(data, keycode) != 1)
-    {
-        data->player->y -= 0.2 * data->player->dir_y;
-        data->player->x -= 0.2 * data->player->dir_x;
-    }
-    if (keycode == 97 && touch_wall(data, keycode) != 1)
-    {
-        data->player->y -= 0.2 * data->player->plane_y;
-        data->player->x -= 0.2 * data->player->plane_x;
-    }
-    if (keycode == 100 && touch_wall(data, keycode) != 1)
-    {
-        data->player->y += 0.2 * data->player->plane_y;
-        data->player->x += 0.2 * data->player->plane_x;
-    }
-    if (keycode == 65361) //fleche gauche
-        arrow_left(data);
-    if (keycode == 65363) //fleche droite
-        arrow_right(data);
-	return (0);
 }
