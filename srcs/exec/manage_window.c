@@ -14,13 +14,11 @@
 
 void init_texture(t_data *data)
 {
-    int width;
-    int height;
 
-    data->texture->wall_N = mlx_xpm_file_to_image(data->mlx->mlx, data->NO_texture, &width, &height);
-    data->texture->wall_S = mlx_xpm_file_to_image(data->mlx->mlx, data->SO_texture, &width, &height);
-    data->texture->wall_E = mlx_xpm_file_to_image(data->mlx->mlx, data->EA_texture, &width, &height);
-    data->texture->wall_W = mlx_xpm_file_to_image(data->mlx->mlx, data->WE_texture, &width, &height);
+    data->texture->wall_N = mlx_xpm_file_to_image(data->mlx->mlx, data->NO_texture, &data->texture->width, &data->texture->height);
+    data->texture->wall_S = mlx_xpm_file_to_image(data->mlx->mlx, data->SO_texture, &data->texture->width, &data->texture->height);
+    data->texture->wall_E = mlx_xpm_file_to_image(data->mlx->mlx, data->EA_texture, &data->texture->width, &data->texture->height);
+    data->texture->wall_W = mlx_xpm_file_to_image(data->mlx->mlx, data->WE_texture, &data->texture->width, &data->texture->height);
     color_ceil_floor(data, 0);
 	color_ceil_floor(data, 1);
 }

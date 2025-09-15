@@ -71,6 +71,8 @@ typedef struct t_texture
 	void *wall_W;
 	void *floor;
 	void *ceiling;
+	int		width;
+	int		height;
 } t_texture;
 typedef struct t_player
 {

@@ -48,8 +48,8 @@ void draw_column(t_data *data, int x, int draw_start, int draw_end)
     double wall_x;
    
     init_draw_start_end(&draw_start, &draw_end, &wall_height, &step);
-    wall_ver_or_hor(data);
     init_wall_x(&wall_x, data);
+    wall_ver_or_hor(data);
     data->texture->tex_pos = (draw_start - WINDOW_HEIGHT / 2 + wall_height / 2) * step;
     y = 0;
     while (y < draw_start)

@@ -38,16 +38,22 @@ void wall_ver_or_hor(t_data *data)
     if (data->player->side == 0) // Mur vertical
     {
         if (data->player->ray_dir_x > 0)
-            data->wall_texture = data->texture->wall_E; // Mur Est
+            data->wall_texture = data->texture->wall_E;
         else
-            data->wall_texture = data->texture->wall_W; // Mur Ouest
+        {
+            data->wall_texture = data->texture->wall_W;
+            data->texture->tex_x = 63 - data->texture->tex_x; // Flip Est
+        }
     }
     else // Mur horizontal
     {
         if (data->player->ray_dir_y > 0)
-            data->wall_texture = data->texture->wall_S; // Mur Sud
+        {
+            data->wall_texture = data->texture->wall_S;
+            data->texture->tex_x = 63 - data->texture->tex_x; // Flip Sud
+        }
         else
-            data->wall_texture = data->texture->wall_N; // Mur Nord
+            data->wall_texture = data->texture->wall_N;
     }
 }
 void init_wall_x(double *wall_x, t_data *data)
