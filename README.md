@@ -5,7 +5,7 @@
   </p>
 </div>
 
-<hr />
+<hr /> 
 
 <h2>📖 About the project</h2>
 <p>
