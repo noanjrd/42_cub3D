@@ -12,71 +12,72 @@
 
 #include "../../include/cub3D.h"
 
-static int  count_words(const char *s, char c)
+static int	count_words(char const *s, char c)
 {
-    int count = 0;
-    int in_word = 0;
+	int	words;
+	int	i;
 
-    while (*s)
-    {
-        if (*s != c && !in_word)
-        {
-            in_word = 1;
-            count++;
-        }
-        else if (*s == c)
-            in_word = 0;
-        s++;
-    }
-    return (count);
+	words = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			words++;
+		i++;
+	}
+	return (words);
 }
 
-static char *word_dup(const char *s, int start, int end)
+static void	cpy_tab(char *new, char const *s, char c)
 {
-    char *word;
-    int   i = 0;
+	int	i;
 
-    word = malloc((end - start + 1) * sizeof(char));
-    if (!word)
-        return (NULL);
-    while (start < end)
-        word[i++] = s[start++];
-    word[i] = '\0';
-    return (word);
+	i = 0;
+	while (s[i] && s[i] != c)
+	{
+		new[i] = s[i];
+		i++;
+	}
+	new[i] = '\0';
 }
 
-static void free_all(char **arr, int i)
+static void	set_mem(char **tab, char const *s, char c)
 {
-    while (i-- > 0)
-        free(arr[i]);
-    free(arr);
+	int	count;
+	int	index;
+	int	i;
+
+	index = 0;
+	i = 0;
+	while (s[index])
+	{
+		count = 0;
+		while (s[index + count] && s[index + count] != c)
+			count++;
+		if (count > 0)
+		{
+			tab[i] = malloc(sizeof(char) * (count + 1));
+			if (!tab[i])
+				return ;
+			cpy_tab(tab[i], (s + index), c);
+			i++;
+			index = index + count;
+		}
+		else
+			index++;
+	}
+	tab[i] = NULL;
 }
 
-char    **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-    char    **result;
-    int     i = 0, j = 0, start;
+	int		words;
+	char	**tab;
 
-    if (!s)
-        return (NULL);
-    result = malloc((count_words(s, c) + 1) * sizeof(char *));
-    if (!result)
-        return (NULL);
-    while (s[i])
-    {
-        if (s[i] != c)
-        {
-            start = i;
-            while (s[i] && s[i] != c)
-                i++;
-            result[j] = word_dup(s, start, i);
-            if (!result[j])
-                return (free_all(result, j), NULL);
-            j++;
-        }
-        else
-            i++;
-    }
-    result[j] = NULL;
-    return (result);
+	words = count_words(s, c);
+	tab = malloc(sizeof(char *) * (words + 1));
+	if (!tab)
+		return (NULL);
+	set_mem(tab, s, c);
+	return (tab);
 }

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:39:03 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:40:17 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/16 17:32:50 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-char *ft_copy_info(char *line)
+char	*ft_copy_info(char *line)
 {
-	int i;
-	int j;
-	int z;
-	char *new;
+	int		i;
+	int		j;
+	int		z;
+	char	*new;
 
 	i = 0;
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
-	i+= 2;
+	i += 2;
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
 	j = i;
@@ -41,62 +41,60 @@ char *ft_copy_info(char *line)
 	return (new);
 }
 
-int check_first_param(t_data *data)
+int	check_first_param(t_data *data)
 {
-	if (data->f_color && data->c_color &&
-		data->no_texture && data->so_texture &&
-		data->ea_texture && data->we_texture)
+	if (data->f_color && data->c_color && data->no_texture && data->so_texture
+		&& data->ea_texture && data->we_texture)
 	{
 		return (1);
 	}
 	return (0);
 }
 
-int open_textures(t_data *data)
+int	open_textures(t_data *data)
 {
-	int fd;
+	int	fd;
 
 	fd = open(data->no_texture, O_RDONLY, 0700);
 	if (fd < 0)
-		return -1;
+		return (-1);
 	close(fd);
 	fd = open(data->so_texture, O_RDONLY, 0700);
 	if (fd < 0)
-		return -1;
+		return (-1);
 	close(fd);
 	fd = open(data->we_texture, O_RDONLY, 0700);
 	if (fd < 0)
-		return -1;
+		return (-1);
 	close(fd);
 	fd = open(data->ea_texture, O_RDONLY, 0700);
 	if (fd < 0)
-		return -1;
+		return (-1);
 	close(fd);
-	return 0;
+	return (0);
 }
 
-int check_name_map(t_map *map)
+int	check_name_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map->map_file[i] && map->map_file[i] != '.')
 		i++;
 	if (map->map_file[i] == 0)
-		return -1;
+		return (-1);
 	i++;
-	if (!map->map_file[i] || !map->map_file[i + 1] ||
-		!map->map_file[i + 2])
-		return -1;
-	if (map->map_file[i] != 'c' || map->map_file[i + 1] != 'u' ||
-			map->map_file[i + 2] != 'b' || map->map_file[i + 3] != 0)
-		return -1;
-	return 0;
+	if (!map->map_file[i] || !map->map_file[i + 1] || !map->map_file[i + 2])
+		return (-1);
+	if (map->map_file[i] != 'c' || map->map_file[i + 1] != 'u'
+		|| map->map_file[i + 2] != 'b' || map->map_file[i + 3] != 0)
+		return (-1);
+	return (0);
 }
 
-int parsing(t_data *data)
+int	parsing(t_data *data)
 {
-	int fd;
+	int	fd;
 
 	if (check_name_map(data->map) == -1)
 		return (ft_print_error("Wrong file extension."), -1);
@@ -116,5 +114,5 @@ int parsing(t_data *data)
 		return (ft_print_error(NOT_A_BYTE), -1);
 	if (open_textures(data) == -1)
 		return (ft_print_error("Can't open one of the textures."), -1);
-	return 0;
+	return (0);
 }

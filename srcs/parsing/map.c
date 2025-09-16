@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:28:02 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/16 17:30:31 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int skip_old_line(char *line)
+int	skip_old_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!line)
@@ -28,13 +28,13 @@ int skip_old_line(char *line)
 
 void	put_x_to_line(t_map *map, char *line, int z)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = map->map_length + 2;
 	map->map[z] = malloc((len + 1) * sizeof(char));
-	while(i < len)
+	while (i < len)
 	{
 		map->map[z][i] = 'X';
 		i++;
@@ -42,16 +42,17 @@ void	put_x_to_line(t_map *map, char *line, int z)
 	map->map[z][i] = 0;
 	if (z == (map->map_height + 1))
 	{
-		line = map->map[z + 1] = NULL;
+		map->map[z + 1] = NULL;
+		line = NULL;
 	}
 	i = 0;
 	return ;
 }
 
-void get_line_map(t_map *map, int fd)
+void	get_line_map(t_map *map, int fd)
 {
-	char *line;
-	int z;
+	char	*line;
+	int		z;
 
 	z = 1;
 	line = get_next_line(fd);
@@ -74,13 +75,12 @@ void get_line_map(t_map *map, int fd)
 			copy_line_map(map, line, z, 0);
 	}
 	put_x_to_line(map, line, (map->map_height + 1));
-	// ft_print_tab(map->map);
 }
 
-int get_map_next(t_map *map)
+int	get_map_next(t_map *map)
 {
-	int fd2;
-	int fd3;
+	int	fd2;
+	int	fd3;
 
 	fd2 = open(map->map_file, O_RDONLY, 0700);
 	if (ft_check_map_error(map, fd2) == -1)
@@ -98,8 +98,8 @@ int get_map_next(t_map *map)
 
 int	get_map(t_map *map, int fd)
 {
-	char *line;
-	
+	char	*line;
+
 	line = get_next_line(fd);
 	if (line)
 		map->map_height++;
@@ -120,4 +120,3 @@ int	get_map(t_map *map, int fd)
 		return (1);
 	return (0);
 }
-

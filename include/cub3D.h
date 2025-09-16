@@ -6,7 +6,7 @@
 /*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/14 19:42:37 by mpinguet         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:45:35 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,3 +188,8 @@ void		calcul_distance_y(t_data *data, double *side_dist_y,
 int			touch_wall(t_data *data);
 void		arrow_left(t_data *data);
 void		arrow_right(t_data *data);
+void		calcul_draw_start_end(double *wall_dist, t_data *data,
+				int *draw_start, int *draw_end);
+void		calcul_x_y_wall(t_data *data, int *x, int *y);
+void		calcul_cast_ray(t_data *data);
+int			ray_touch_wall(t_data *data);

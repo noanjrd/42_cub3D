@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:04:57 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:31:19 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/16 17:26:42 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static int skip_trailing_whitespace(char *line, int i)
+static int	skip_trailing_whitespace(char *line, int i)
 {
 	while (line[i] && line[i] != '\n')
 		i++;
 	i--;
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i--;
-	return i;
+	return (i);
 }
 
-static int allocate_map_line(t_map *map, int z, int j)
+static int	allocate_map_line(t_map *map, int z, int j)
 {
 	map->map[z] = malloc((j + 4 + (map->map_length - j)) * sizeof(char));
 	if (!map->map[z])
-		return -1;
+		return (-1);
 	return (0);
 }
 
-static int fill_prefix(t_map *map, char *line, int z)
+static int	fill_prefix(t_map *map, char *line, int z)
 {
-	int h;
-	int i;
+	int	h;
+	int	i;
 
 	h = 0;
 	i = 1;
@@ -43,34 +43,36 @@ static int fill_prefix(t_map *map, char *line, int z)
 		map->map[z][i++] = 'X';
 		h++;
 	}
-	return i;
+	return (i);
 }
 
-static void count_player(char *line, t_map *map)
+static void	count_player(char *line, t_map *map)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (line[i])
 	{
-		if (line[i] == 'S' || line[i] == 'W' ||
-			line[i] == 'E' || line[i] == 'N')
+		if (line[i] == 'S' || line[i] == 'W' || line[i] == 'E'
+			|| line[i] == 'N')
 			map->nb_player++;
 		i++;
 	}
 }
 
-int copy_line_map(t_map *map, char *line, int z, int i)
+int	copy_line_map(t_map *map, char *line, int z, int i)
 {
-	int j;
-	int start;
+	int	j;
+	int	start;
 
 	if (line[i] == '\n')
-		return 0;
+		return (0);
 	j = skip_trailing_whitespace(line, i);
 	if (allocate_map_line(map, z, j) == -1)
-		return -1;
+		return (-1);
 	start = fill_prefix(map, line, z);
 	map->l = line;
 	fill_line(map, z, start, j);
 	count_player(line, map);
-	return 0;
+	return (0);
 }

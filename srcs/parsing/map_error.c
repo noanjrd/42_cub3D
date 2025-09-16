@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 12:58:24 by njard             #+#    #+#             */
-/*   Updated: 2025/07/31 13:29:25 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/16 17:31:51 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void check_length_line(t_map *map, char *line)
+void	check_length_line(t_map *map, char *line)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = i;
@@ -31,10 +31,10 @@ void check_length_line(t_map *map, char *line)
 	return ;
 }
 
-int	check_line_format_next(char *line, int z , int i, int j)
+int	check_line_format_next(char *line, int z, int i, int j)
 {
 	i = 0;
-	while ( line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
+	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
 	if (line[i] != '1')
 		return (-1);
@@ -46,10 +46,9 @@ int	check_line_format_next(char *line, int z , int i, int j)
 		j--;
 	while (i <= j)
 	{
-		if (line[i] != '0' && line[i] != '1' &&
-				line[i] != 'E' && line[i] != 'S' &&
-				line[i] != 'W' && line[i] != 'N' &&
-				line[i] != ' ' && !(line[i] >= 7 && line[i] <= 13))
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'E' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != 'N' && line[i] != ' '
+			&& !(line[i] >= 7 && line[i] <= 13))
 			return (-1);
 		i++;
 	}
@@ -60,10 +59,10 @@ int	check_line_format_next(char *line, int z , int i, int j)
 
 int	check_line_format(t_map *map, char *line, int z, int i)
 {
-	int j;
+	int	j;
 
 	if (line[i] == '\n')
-		return 0;
+		return (0);
 	while (line[i] && (line[i] == ' ' || (line[i] >= 7 && line[i] <= 13)))
 		i++;
 	j = i;
@@ -76,21 +75,21 @@ int	check_line_format(t_map *map, char *line, int z, int i)
 	{
 		while (i <= j)
 		{
-			if (line[i] !=  '1' &&
-				line[i] != ' ' && !(line[i] >= 7 && line[i] <= 13))
+			if (line[i] != '1' && line[i] != ' ' && !(line[i] >= 7
+					&& line[i] <= 13))
 				return (-1);
 			i++;
-		}	
+		}
 	}
 	check_length_line(map, line);
-	return (check_line_format_next(line, z , 0, 0));
+	return (check_line_format_next(line, z, 0, 0));
 }
 
-int ft_check_map_error(t_map *map, int fd)
+int	ft_check_map_error(t_map *map, int fd)
 {
-	char *line;
-	int z;
-	int error;
+	char	*line;
+	int		z;
+	int		error;
 
 	z = 0;
 	error = 0;

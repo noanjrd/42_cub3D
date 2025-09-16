@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getline.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njard <njard@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:58:28 by njard             #+#    #+#             */
-/*   Updated: 2025/07/16 15:01:51 by njard            ###   ########.fr       */
+/*   Updated: 2025/09/16 17:22:53 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	buffer_contains_newline(char *buffer)
 	int	i;
 
 	i = 0;
-	if (! buffer)
+	if (!buffer)
 		return (0);
 	while (buffer[i] != '\0')
 	{
@@ -58,10 +58,10 @@ char	*get_buffer(int fd, char *buffer)
 	int		bytes_read;
 
 	temp = malloc(sizeof(char) * (1000 + 1));
-	if (! temp)
+	if (!temp)
 		return (ft_free_buffer(buffer, temp, 1));
 	end = buffer_contains_newline(buffer);
-	while (! end)
+	while (!end)
 	{
 		bytes_read = read(fd, temp, 1000);
 		if (bytes_read < 0)
@@ -70,7 +70,7 @@ char	*get_buffer(int fd, char *buffer)
 			break ;
 		temp[bytes_read] = '\0';
 		buffer = ft_strjoin_gnl(buffer, temp);
-		if (! buffer)
+		if (!buffer)
 			return (NULL);
 		end = buffer_contains_newline(buffer);
 	}
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || fd >= 80)
 		return (NULL);
 	buffer[fd] = get_buffer(fd, buffer[fd]);
-	if (! buffer[fd] || buffer[fd][0] == '\0')
+	if (!buffer[fd] || buffer[fd][0] == '\0')
 		return (ft_free_buffer(buffer[fd], buffer[fd], 1));
 	line = get_line_from_buffer(buffer[fd]);
 	buffer[fd] = update_buffer(buffer[fd]);

@@ -6,20 +6,20 @@
 /*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 10:57:45 by njard             #+#    #+#             */
-/*   Updated: 2025/09/14 20:03:15 by mpinguet         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:51:17 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (argc == 1)
-		return (ft_print_error("Miss an argument"),0);
+		return (ft_print_error("Miss an argument"), 0);
 	if (argc > 2)
-		return (ft_print_error("Too many arguments"),0);
+		return (ft_print_error("Too many arguments"), 0);
 	data = malloc(sizeof(t_data));
 	ft_init_data(data, argv);
 	if (parsing(data) == 0)
@@ -28,11 +28,11 @@ int main(int argc, char **argv)
 		init_player(data);
 		init_texture(data);
 		mlx_hook(data->mlx->win, 17, 0, close_window, data);
-		mlx_hook(data->mlx->win, 2, 1L << 0, on_key_press, data);   // Event type = 2
+		mlx_hook(data->mlx->win, 2, 1L << 0, on_key_press, data);
 		mlx_hook(data->mlx->win, 3, 1L << 1, on_key_release, data);
 		mlx_loop_hook(data->mlx->mlx, calcul_display, data);
 		mlx_loop(data->mlx->mlx);
 	}
 	ft_free_data(data);
-	return 0;
+	return (0);
 }
