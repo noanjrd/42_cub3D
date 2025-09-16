@@ -12,9 +12,9 @@
 
 #include "../../include/cub3D.h"
 
-void transfo_color(char *color, int *r, int *g, int *b)
+void	transfo_color(char *color, int *r, int *g, int *b)
 {
-    char **tab;
+    char		**tab;
 
     tab = ft_split(color, ',');
     *r = ft_atoi(tab[0]);
@@ -23,29 +23,31 @@ void transfo_color(char *color, int *r, int *g, int *b)
     free_split(tab);
 }
 
-void color_ceil_floor(t_data *data, int n)
+void	color_ceil_floor(t_data *data, int n)
 {
-    int hex_color;
-    int r;
-    int g;
-    int b;
+    int		hex_color;
+    int		r;
+    int		g;
+    int		b;
+
     if (n == 1)
     {
-        transfo_color(data->C_color, &r, &g, &b);
+        transfo_color(data->c_color, &r, &g, &b);
         data->texture->col_ceil = ((r << 16) | (g << 8) | b);
     }
     if (n == 0)
     {
-        transfo_color(data->F_color, &r, &g, &b);
+        transfo_color(data->f_color, &r, &g, &b);
         data->texture->col_floor = ((r << 16) | (g << 8) | b);
     }
 }
-void draw_column(t_data *data, int x, int draw_start, int draw_end)
+
+void	draw_column(t_data *data, int x, int draw_start, int draw_end)
 {
-    int y;
-    int wall_height;
-    double step;
-    double wall_x;
+    int		y;
+    int		wall_height;
+    double	step;
+    double	wall_x;
    
     init_draw_start_end(&draw_start, &draw_end, &wall_height, &step);
     init_wall_x(&wall_x, data);
@@ -69,12 +71,12 @@ void draw_column(t_data *data, int x, int draw_start, int draw_end)
         my_mlx_pixel_put(data, x, y++, data->texture->col_floor);
 }
 
-
-void clear_image(t_data *data)
+void	clear_image(t_data *data)
 {
-    int x = 0;
-    int y;
-    
+    int		x;
+    int		y;
+
+    x = 0;    
     while (x < WINDOW_WIDTH)
     {
         y = 0;

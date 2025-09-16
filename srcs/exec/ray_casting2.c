@@ -38,10 +38,10 @@ void wall_ver_or_hor(t_data *data)
     if (data->player->side == 0) // Mur vertical
     {
         if (data->player->ray_dir_x > 0)
-            data->wall_texture = data->texture->wall_E;
+            data->wall_texture = data->texture->wall_e;
         else
         {
-            data->wall_texture = data->texture->wall_W;
+            data->wall_texture = data->texture->wall_w;
             data->texture->tex_x = 63 - data->texture->tex_x; // Flip Est
         }
     }
@@ -49,11 +49,11 @@ void wall_ver_or_hor(t_data *data)
     {
         if (data->player->ray_dir_y > 0)
         {
-            data->wall_texture = data->texture->wall_S;
+            data->wall_texture = data->texture->wall_s;
             data->texture->tex_x = 63 - data->texture->tex_x; // Flip Sud
         }
         else
-            data->wall_texture = data->texture->wall_N;
+            data->wall_texture = data->texture->wall_n;
     }
 }
 void init_wall_x(double *wall_x, t_data *data)

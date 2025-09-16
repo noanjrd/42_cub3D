@@ -40,10 +40,10 @@ void free_split(char **tab)
 
 void destroy_window(t_data *data)
 {
-	mlx_destroy_image(data->mlx->mlx, data->texture->wall_N);
-	mlx_destroy_image(data->mlx->mlx, data->texture->wall_S);
-	mlx_destroy_image(data->mlx->mlx, data->texture->wall_E);
-	mlx_destroy_image(data->mlx->mlx, data->texture->wall_W);
+	mlx_destroy_image(data->mlx->mlx, data->texture->wall_n);
+	mlx_destroy_image(data->mlx->mlx, data->texture->wall_s);
+	mlx_destroy_image(data->mlx->mlx, data->texture->wall_e);
+	mlx_destroy_image(data->mlx->mlx, data->texture->wall_w);
     mlx_destroy_image(data->mlx->mlx, data->mlx->img);
     mlx_destroy_window(data->mlx->mlx, data->mlx->win);
     mlx_destroy_display(data->mlx->mlx);
@@ -53,12 +53,12 @@ void destroy_window(t_data *data)
     free(data->mlx);
     free(data->ceiling);
     free(data->floor);
-    free(data->SO_texture);
-    free(data->F_color);
-    free(data->C_color);
-    free(data->NO_texture);
-    free(data->WE_texture);
-    free(data->EA_texture);
+    free(data->f_color);
+    free(data->c_color);
+    free(data->so_texture);
+    free(data->no_texture);
+    free(data->we_texture);
+    free(data->ea_texture);
     free(data->player);
     free(data->texture);
     free(data);

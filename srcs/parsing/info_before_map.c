@@ -40,21 +40,21 @@ int check_info_next(t_data *data, char *line, int i)
 		return 0;
 	else if (check_string_beggining(line, "SO",1) == 1)
 	{
-		if (data->SO_texture)
+		if (data->so_texture)
 			return -1;
-		data->SO_texture = ft_copy_info(line);
+		data->so_texture = ft_copy_info(line);
 	}
 	else if (check_string_beggining(line, "F",0) == 1)
 	{
-		if (data->F_color)
+		if (data->f_color)
 			return -1;
-		data->F_color = ft_copy_info(line);
+		data->f_color = ft_copy_info(line);
 	}
 	else if (check_string_beggining(line, "C",0) == 1)
 	{
-		if (data->C_color)
+		if (data->c_color)
 			return -1;
-		data->C_color = ft_copy_info(line);
+		data->c_color = ft_copy_info(line);
 	}
 	else if (check_other_character(line, i) == 1)
 		return (ft_print_error("Wrong texture name or character of map."), -1);
@@ -68,21 +68,21 @@ int	check_info(t_data *data, char *line, int i)
 		return -1;
 	else if (check_string_beggining(line, "NO",1) == 1)
 	{
-		if (data->NO_texture)
+		if (data->no_texture)
 			return -1;
-		data->NO_texture = ft_copy_info(line);
+		data->no_texture = ft_copy_info(line);
 	}
 	else if (check_string_beggining(line, "WE",1) == 1)
 	{
-		if (data->WE_texture)
+		if (data->we_texture)
 			return -1;
-		data->WE_texture = ft_copy_info(line);
+		data->we_texture = ft_copy_info(line);
 	}
 	else if (check_string_beggining(line, "EA",1) == 1)
 	{
-		if (data->EA_texture)
+		if (data->ea_texture)
 			return -1;
-		data->EA_texture = ft_copy_info(line);
+		data->ea_texture = ft_copy_info(line);
 	}
 	return (check_info_next(data, line, i));
 }

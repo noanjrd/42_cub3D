@@ -43,9 +43,9 @@ char *ft_copy_info(char *line)
 
 int check_first_param(t_data *data)
 {
-	if (data->F_color && data->C_color &&
-		data->NO_texture && data->SO_texture &&
-		data->EA_texture && data->WE_texture)
+	if (data->f_color && data->c_color &&
+		data->no_texture && data->so_texture &&
+		data->ea_texture && data->we_texture)
 	{
 		return (1);
 	}
@@ -56,19 +56,19 @@ int open_textures(t_data *data)
 {
 	int fd;
 
-	fd = open(data->NO_texture, O_RDONLY, 0700);
+	fd = open(data->no_texture, O_RDONLY, 0700);
 	if (fd < 0)
 		return -1;
 	close(fd);
-	fd = open(data->SO_texture, O_RDONLY, 0700);
+	fd = open(data->so_texture, O_RDONLY, 0700);
 	if (fd < 0)
 		return -1;
 	close(fd);
-	fd = open(data->WE_texture, O_RDONLY, 0700);
+	fd = open(data->we_texture, O_RDONLY, 0700);
 	if (fd < 0)
 		return -1;
 	close(fd);
-	fd = open(data->EA_texture, O_RDONLY, 0700);
+	fd = open(data->ea_texture, O_RDONLY, 0700);
 	if (fd < 0)
 		return -1;
 	close(fd);
@@ -108,9 +108,9 @@ int parsing(t_data *data)
 	else if (check_map_closed(data->map) == 1)
 		return (close(fd), ft_print_error("The map is not closed"), -1);
 	close(fd);
-	if (color_to_int(data->F_color, data->floor) == -1)
+	if (color_to_int(data->f_color, data->floor) == -1)
 		return (ft_print_error(WRONG_COLOR_FORMAT), -1);
-	if (color_to_int(data->C_color, data->ceiling) == -1)
+	if (color_to_int(data->c_color, data->ceiling) == -1)
 		return (ft_print_error(NOT_RGB), -1);
 	if (check_good_format_color(data) == -1)
 		return (ft_print_error(NOT_A_BYTE), -1);

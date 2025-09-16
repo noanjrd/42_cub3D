@@ -44,12 +44,12 @@ void ft_free_map(t_map *map)
 
 void ft_free_data(t_data *data)
 {
-	free(data->C_color);
-	free(data->F_color);
-	free(data->NO_texture);
-	free(data->SO_texture);
-	free(data->WE_texture);
-	free(data->EA_texture);
+	free(data->c_color);
+	free(data->f_color);
+	free(data->no_texture);
+	free(data->so_texture);
+	free(data->we_texture);
+	free(data->ea_texture);
 	free(data->floor);
 	free(data->ceiling);
 	free(data->player);
