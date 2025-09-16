@@ -27,7 +27,6 @@ void	transfo_color(char *color, int *r, int *g, int *b)
 
 void	color_ceil_floor(t_data *data, int n)
 {
-	int		hex_color;
 	int		r;
 	int		g;
 	int		b;
@@ -64,7 +63,7 @@ void	draw_column(t_data *data, int x, int draw_start, int draw_end)
 	{
 		data->texture->tex_y = (int)data->texture->tex_pos & 63;
 		data->texture->tex_pos += step;
-		data->texture->color = get_texture_pixel(data, data->wall_texture,
+		data->texture->color = get_texture_pixel(data->wall_texture,
 				data->texture->tex_x, data->texture->tex_y);
 		my_mlx_pixel_put(data, x, y++, data->texture->color);
 	}

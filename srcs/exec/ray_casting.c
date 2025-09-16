@@ -37,7 +37,7 @@ void	calcul_perp_wall(t_data *data, int side, int step_x, int step_y)
 				+ (1 - step_y) / 2) / data->player->ray_dir_y;
 }
 
-double	cast_ray(t_data *data, double ray_dir_x, double ray_dir_y)
+double	cast_ray(t_data *data)
 {
 	double	side_dist_x;
 	double	side_dist_y;

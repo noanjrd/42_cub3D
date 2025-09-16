@@ -43,8 +43,7 @@ int	calcul_display(t_data *data)
 			* data->player->camera_x;
 		data->player->ray_dir_y = data->player->dir_y + data->player->plane_y
 			* data->player->camera_x;
-		wall_dist = cast_ray(data, data->player->ray_dir_x,
-				data->player->ray_dir_y);
+		wall_dist = cast_ray(data);
 		calcul_draw_start_end(&wall_dist, data, &draw_start, &draw_end);
 		draw_column(data, x, draw_start, draw_end);
 		x++;

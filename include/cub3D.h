@@ -6,7 +6,7 @@
 /*   By: mpinguet <mpinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:00:21 by njard             #+#    #+#             */
-/*   Updated: 2025/09/16 16:45:35 by mpinguet         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:58:39 by mpinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void		init_position(t_data *data);
 void		init_player(t_data *data);
 void		init_dir(t_data *data);
 void		init_plane(t_data *data);
-double		cast_ray(t_data *data, double ray_dir_x, double ray_dir_y);
+double		cast_ray(t_data *data);
 void		draw_column(t_data *data, int x, int draw_start, int draw_end);
 void		key_action(t_data *data);
 void		calcul_player(t_data *data);
@@ -173,7 +173,7 @@ void		init_draw_start_end(int *draw_start, int *draw_end,
 				int *wall_height, double *step);
 void		init_wall_x(double *wall_x, t_data *data);
 void		wall_ver_or_hor(t_data *data);
-int			get_texture_pixel(t_data *data, void *texture_img, int tex_x,
+int			get_texture_pixel(void *texture_img, int tex_x,
 				int tex_y);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		color_ceil_floor(t_data *data, int n);

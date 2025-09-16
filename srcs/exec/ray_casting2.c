@@ -23,7 +23,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	get_texture_pixel(t_data *data, void *texture_img, int tex_x, int tex_y)
+int	get_texture_pixel(void *texture_img, int tex_x, int tex_y)
 {
 	char	*texture_data;
 	char	*dst;
