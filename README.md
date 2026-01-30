@@ -61,7 +61,7 @@ make
 
 <h2>📚 What we learned</h2>
 <ul>
-  <li>How a basic 3D engine works using <strong>raycasting</strong> and the math behind it</li>
+  <li>How a basic 3D engine works using <strong>raycasting</strong> and the math behind it (DDA algorithm)</li>
   <li>Vector math for movement, direction, and collision detection</li>
   <li>Coordinate systems and mapping 2D grid maps to 3D space</li>
   <li>Working with the <strong>MiniLibX</strong> library for graphics</li>
