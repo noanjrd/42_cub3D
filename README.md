@@ -7,10 +7,6 @@
 
 **A 3D maze exploration game inspired by Wolfenstein 3D**
 
-![42 School Project](https://img.shields.io/badge/42-Project-00babc?style=flat-square&logo=42)
-![Language](https://img.shields.io/badge/Language-C-blue?style=flat-square)
-![Graphics](https://img.shields.io/badge/Graphics-MiniLibX-orange?style=flat-square)
-
 
 </div>
 
