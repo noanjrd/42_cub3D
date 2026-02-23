@@ -11,14 +11,14 @@
 </div>
 
 
-## 📖 About
+## About
 
 **cub3D** is a raycasting-based 3D game engine project from 42 School's curriculum. This project is an introduction to raycasting techniques, creating a realistic 3D perspective in a 2D game environment, similar to the classic game Wolfenstein 3D.
 
 The player navigates through a maze from a first-person perspective, with textured walls, floor and ceiling colors, and smooth movements and rotations.
 
 
-## 🎮 Features
+## Features
 
 - **Raycasting Engine**: Real-time 3D rendering using raycasting algorithms
 - **Textured Walls**: Different textures for each cardinal direction (North, South, East, West)
@@ -29,7 +29,7 @@ The player navigates through a maze from a first-person perspective, with textur
 - **Error Handling**: Comprehensive map validation and error messages
 
 
-## 🛠️ Installation
+## Installation
 
 ### Prerequisites
 
@@ -54,7 +54,7 @@ make
 The Makefile will automatically clone and build the MiniLibX library if not present.
 
 
-## 🎯 Usage
+## Usage
 
 ```bash
 ./cub3D <map_file.cub>
@@ -77,7 +77,7 @@ The Makefile will automatically clone and build the MiniLibX library if not pres
 - **Mouse movement**: Rotate camera (horizontal)
 
 
-## 🗺️ Map Configuration
+## Map Configuration
 
 Maps are defined in `.cub` files with the following format:
 
@@ -121,7 +121,7 @@ C 105,201,249   # Ceiling color
 - Map must be closed (no gaps in walls)
 
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 cub3D/
@@ -139,7 +139,7 @@ cub3D/
 ```
 
 
-## 🔧 Compilation Flags
+## Compilation Flags
 
 The project compiles with strict flags:
 
@@ -153,7 +153,7 @@ For debugging, uncomment the sanitizer flag in the Makefile:
 FLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address,leak
 ```
 
-## 🧮 Algorithm Overview
+## Algorithm Overview
 
 ### Raycasting
 
@@ -167,7 +167,7 @@ The raycasting algorithm works by:
 6. **Rendering**: Draw the vertical stripe with proper texture and colors
 
 
-## 🐛 Error Handling
+## Error Handling
 
 The program validates:
 
@@ -180,7 +180,7 @@ The program validates:
 - Valid map characters
 - No duplicated configuration parameters
 
-## 📝 Makefile Commands
+## Makefile Commands
 
 | Command | Description |
 |---------|-------------|
@@ -190,7 +190,7 @@ The program validates:
 | `make re` | Recompile the project |
 
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 This project teaches:
 
@@ -202,13 +202,13 @@ This project teaches:
 - **File parsing**: Configuration file reading and validation
 
 
-## 👥 Authors
+## Authors
 
 - **JARD Noan** - [@noanjrd](https://github.com/noanjrd)
 - **PINGUET Macéo** - [@mpinguet](https://github.com/mpinguet)
 
 
-## 📄 License
+## License
 
 This project is part of the 42 School curriculum and follows the school's academic policies.
 
